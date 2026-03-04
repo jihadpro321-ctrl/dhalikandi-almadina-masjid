@@ -277,7 +277,7 @@ function renderUI(t){
   jb.style.opacity = isFriday ? "1" : "0.6";
 
   // Auto Adhan
-autoAdhan(schedule);
+enhancedAdhan(schedule);
 checkPrayerAnnouncements(schedule);
 updateProgress(schedule, next);
 loadRamadanInfo(t);
@@ -312,14 +312,7 @@ function buildLocalDateFromHHMM(hhmm, offMin = 0) {
 }
 
     // play once when within 2 seconds of prayer time
-    if(!playedKeys[key] && Math.abs(now.getTime() - when.getTime()) <= 30000){
-      try{
-        adhanAudio.currentTime = 0;
-        adhanAudio.play();
-      }catch(e){}
-      playedKeys[key] = true;
-    }
-  
+   
 
 
 // ===== Load prayer times from API =====
@@ -718,4 +711,3 @@ function updateProgress(schedule, next){
 }
 loadWeather();
 loadMoon();
-loadRamadanInfo();
