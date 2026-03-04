@@ -324,7 +324,7 @@ function buildLocalDateFromHHMM(hhmm, offMin = 0) {
 
 // ===== Load prayer times from API =====
 async function loadPrayerTimes(){
-  const url = `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=1`;
+  const url = `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=1&timezonestring=Asia/Dhaka`;
   const res = await fetch(url);
   const data = await res.json();
   const t = data.data.timings;
