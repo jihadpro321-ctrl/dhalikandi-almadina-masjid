@@ -289,21 +289,27 @@ function addOffsetToTime(hhmm, offMin){
   return d.toLocaleTimeString("en-US", { hour:"numeric", minute:"2-digit", hour12:true });
 }
 
-function buildLocalDateFromHHMM(hhmm, offMin){
-  const [h,m] = hhmm.split(":").map(Number);
-  const d = new Date();
-  d.setHours(h, m, 0, 0);
-  d.setMinutes(d.getMinutes() + (offMin || 0));
+function buildLocalDateFromHHMM(hhmm, offMin = 0) {
+  const [h, m] = hhmm.split(":").map(Number);
+
+  // get Dhaka date parts
+  const now = new Date();
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: TIMEZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).formatToParts(now);
+
+  const y = parts.find(p => p.type === "year").value;
+  const mo = parts.find(p => p.type === "month").value;
+  const da = parts.find(p => p.type === "day").value;
+
+  const d = new Date(`${y}-${mo}-${da}T${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:00`);
+
+  d.setMinutes(d.getMinutes() + offMin);
   return d;
 }
-
-function autoAdhan(schedule){
-  if(!adhanEnabled) return;
-
- const now = new Date();
-  for(const p of PRAYERS_MAIN){
-    const when = schedule[p];
-    const key = `${p}_${new Intl.DateTimeFormat("en-CA",{timeZone:TIMEZONE,year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date())}`;
 
     // play once when within 2 seconds of prayer time
     if(!playedKeys[key] && Math.abs(now.getTime() - when.getTime()) <= 2000){
@@ -636,21 +642,18 @@ function loadMoon(){
 /* =====================================================
 🌙 RAMADAN INFORMATION (BANGLA)
 ===================================================== */
-
 function loadRamadanInfo(timings){
 
-  // Sehri = Fajr time
-  const sehri = addOffsetToTime(timings.Fajr, OFF.Fajr);
+  const sehriEl = document.getElementById("sehriTime");
+  const iftarEl = document.getElementById("iftarTime");
 
-  // Iftar = Maghrib time
+  if(!sehriEl || !iftarEl) return;
+
+  const sehri = addOffsetToTime(timings.Fajr, OFF.Fajr);
   const iftar = addOffsetToTime(timings.Maghrib, OFF.Maghrib);
 
-  document.getElementById("sehriTime").textContent =
-    "আজ সেহরি শেষ: " + sehri;
-
-  document.getElementById("iftarTime").textContent =
-    "আজ ইফতার: " + iftar;
-
+  sehriEl.textContent = "আজ সেহরি শেষ: " + sehri;
+  iftarEl.textContent = "আজ ইফতার: " + iftar;
 }
 
 
@@ -713,3 +716,6 @@ function updateProgress(schedule, next){
   document.getElementById("progressPercent").textContent =
     Math.floor(percent) + "%";
 }
+loadWeather();
+loadMoon();
+loadRamadanInfo();
