@@ -626,12 +626,14 @@ function loadMoon(){
   if(illumination > 40) visibility = "ভাল";
   if(illumination > 60) visibility = "খুব ভাল";
 
-  document.getElementById("moonVisibility").textContent =
-    "চাঁদ দেখার উপযোগিতা: " + visibility;
-
+ const vis = document.getElementById("moonVisibility");
+if(vis){
+  vis.textContent = "চাঁদ দেখার উপযোগিতা: " + visibility;
 }
 
-
+}
+loadWeather();
+loadMoon();
 /* =====================================================
 🌙 RAMADAN INFORMATION (BANGLA)
 ===================================================== */
