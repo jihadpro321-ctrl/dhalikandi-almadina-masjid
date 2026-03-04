@@ -620,7 +620,7 @@ function loadMoon(){
   }
 
   const illumination = Math.round(phase * 100);
-
+  moonSightingAlert(illumination);
   document.getElementById("moonIcon").textContent = moonIcon;
   document.getElementById("moonText").textContent = moonText;
 
@@ -719,3 +719,23 @@ function updateProgress(schedule, next){
 }
 loadWeather();
 loadMoon();
+function moonSightingAlert(illumination){
+
+  let msg = "";
+
+  if(illumination > 65){
+    msg = "🌙 আজ চাঁদ দেখার সম্ভাবনা খুব বেশি";
+  }
+  else if(illumination > 45){
+    msg = "🌙 আজ চাঁদ দেখার সম্ভাবনা ভালো";
+  }
+  else if(illumination > 25){
+    msg = "🌙 আজ চাঁদ দেখার সম্ভাবনা মাঝারি";
+  }
+  else{
+    msg = "🌙 আজ চাঁদ দেখার সম্ভাবনা কম";
+  }
+
+  MOSQUE_MESSAGES.push(msg);
+
+}
