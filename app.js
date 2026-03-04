@@ -692,7 +692,7 @@ Shows % until next prayer
 
 function updateProgress(schedule, next){
 
-  const now = new Date();
+  const now = new Date(new Date().toLocaleString("en-US",{timeZone:TIMEZONE}));
 
   const nextTime = schedule[next];
 
