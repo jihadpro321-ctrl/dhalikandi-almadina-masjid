@@ -109,13 +109,21 @@ document.getElementById("adhanBtn").onclick = async () => {
   adhanEnabled = true;
 
   // unlock autoplay by user gesture
-  try{
-    await adhanAudio.play();
-    adhanAudio.pause();
-    adhanAudio.currentTime = 0;
-  }catch(e){}
+  document.getElementById("adhanBtn").onclick = () => {
 
-  alert("✅ Adhan Enabled! এখন থেকে ওয়াক্ত হলে অটো বাজবে।");
+  adhanEnabled = true;
+
+  adhanAudio.currentTime = 0;
+
+  adhanAudio.play()
+  .then(()=>{
+      adhanAudio.pause();
+      adhanAudio.currentTime = 0;
+  })
+  .catch(()=>{});
+
+  alert("Adhan Enabled");
+};
 };
 
 // ===== SETTINGS SYSTEM =====
@@ -217,7 +225,7 @@ function renderUI(t){
   const list = document.getElementById("prayerList");
   list.innerHTML = "";
 
-  const now = new Date();
+   const now = new Date(new Date().toLocaleString("en-US",{timeZone:TIMEZONE}));
   const nowDhakaStr = new Intl.DateTimeFormat("en-CA", {
     timeZone: TIMEZONE, weekday:"long"
   }).format(now);
@@ -626,14 +634,12 @@ function loadMoon(){
   if(illumination > 40) visibility = "ভাল";
   if(illumination > 60) visibility = "খুব ভাল";
 
- const vis = document.getElementById("moonVisibility");
-if(vis){
-  vis.textContent = "চাঁদ দেখার উপযোগিতা: " + visibility;
-}
+  document.getElementById("moonVisibility").textContent =
+    "চাঁদ দেখার উপযোগিতা: " + visibility;
 
 }
-loadWeather();
-loadMoon();
+
+
 /* =====================================================
 🌙 RAMADAN INFORMATION (BANGLA)
 ===================================================== */
