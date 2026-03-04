@@ -1,0 +1,158 @@
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ঢালিকান্দি আল-মদিনা জামে মসজিদ | Dhali Kandi Al-Madina Jame Masjid</title>
+
+<meta name="description" content="ঢালিকান্দি আল-মদিনা জামে মসজিদ – নামাজের সময়সূচী, আজান, রমজান ক্যালেন্ডার, সেহরি ও ইফতার সময়।">
+
+<meta name="theme-color" content="#111827">
+
+<link rel="icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<link rel="manifest" href="site.webmanifest">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <div class="overlay">
+
+    <!-- Top Title -->
+  <div class="siteTitle">
+
+  <img src="logo.png" class="mosqueLogo">
+
+  <div class="titleBn">ঢালিকান্দি আল-মদিনা জামে মসজিদ</div>
+
+  <div class="titleEn">Dhalikandi Al-Madina Jame Masjid</div>
+
+</div>
+
+    <!-- Clock Card -->
+    <div class="clockCard">
+      <div id="clock" class="clockTime">--:--:--</div>
+      <div id="date" class="clockDate">---</div>
+      <div id="hijri" class="clockHijri">Hijri: ---</div>
+
+      <div id="nextPrayer" class="nextPrayer">Loading...</div>
+
+      <div class="btnRow">
+        <button id="adhanBtn" class="btn btnRed">🔊 Adhan Enable</button>
+
+        <a class="btn btnBlue"
+           href="https://www.google.com/maps/search/?api=1&query=Dhali+Kandi+Jam-E+Mashjid+Hazratpur+Bangladesh"
+           target="_blank">📍 মসজিদটি খুঁজুন</a>
+
+        <button id="settingsBtn" class="btn btnGray">⚙️ সময় সেটিং</button>
+      </div>
+    </div>
+
+    <!-- Prayer List (THIS is the main UI like screenshot) -->
+    <div class="prayerPanel">
+      <div id="prayerList" class="prayerList"></div>
+
+      <div class="sideTimes">
+        <div class="sideTimeBox">
+          <div class="sideLabel">সূর্যোদয়</div>
+          <div id="sunriseTime" class="sideValue">--:--</div>
+        </div>
+        <div class="sideTimeBox">
+          <div class="sideLabel">সূর্যাস্ত</div>
+          <div id="sunsetTime" class="sideValue">--:--</div>
+        </div>
+      </div>
+
+      <div id="jumuaBox" class="jumuaBox">
+        <div class="jumuaLabel">জুম্মা</div>
+        <div id="jumuaTime" class="jumuaValue">--:--</div>
+      </div>
+    </div>
+
+
+<!-- =====================================================
+📊 NEXT PRAYER PROGRESS BAR
+Shows progress until next prayer
+===================================================== -->
+
+<div class="progressCard">
+
+  <div>পরবর্তী নামাজ পর্যন্ত সময়</div>
+
+  <div class="progressBar">
+    <div id="progressFill">
+      <span id="progressPercent">0%</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- 📢 MOSQUE ANNOUNCEMENT BOARD
+Editable message board
+===================================================== -->
+
+<div class="noticeBoard">
+  <div class="noticeTitle">📢 মসজিদের ঘোষণা</div>
+  <div id="noticeContent"></div>
+</div>
+
+
+<!-- =====================================================
+🌤 DHAKA WEATHER WIDGET
+===================================================== -->
+
+<div class="weatherBox">
+  <div id="weatherIcon">☀️</div>
+  <div id="weatherTemp">--°C</div>
+  <div id="weatherDesc">Dhaka</div>
+</div>
+
+<div class="moonBox">
+
+  <div id="moonIcon">🌙</div>
+
+  <div id="moonText">Moon Phase</div>
+
+  <div id="moonExtra"></div>
+
+</div>
+
+
+
+    <!-- Ramadan Poster (optional) -->
+    <div class="ramadanWrap">
+      <div class="ramadanTitle">রমজান সেহরি ও ইফতার ক্যালেন্ডার</div>
+      <img class="ramadanPoster" src="ramadan.png.jpeg" alt="Ramadan Calendar">
+    </div>
+
+  <!-- Settings Modal -->
+<div id="settingsModal" class="settingsModal">
+  <div class="settingsBox">
+
+    <div class="settingsHeader">
+      <div class="settingsTitle">🛠️ সময় সেটিং (মিনিট +/-) — Auto Save</div>
+      <button id="closeSettings" class="settingsClose">✕</button>
+    </div>
+
+    <div id="settingsGrid" class="settingsGrid"></div>
+
+    <div class="settingsFooter">
+      <button id="resetOffsets" class="btn btnGray">Reset</button>
+    </div>
+
+  </div>
+</div>
+
+    <audio id="adhanAudio" src="Abdul-Basit.mp3" preload="auto"></audio>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,612 @@
+:root{
+  --glass: rgba(0,0,0,0.38);
+  --glass2: rgba(255,255,255,0.08);
+  --text: #fff;
+  --muted: rgba(255,255,255,0.85);
+  --purple: rgba(128, 64, 255, 0.65);
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  color: var(--text);
+  background-image: url("bg.jpg"); /* make sure file name matches */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.overlay{
+  min-height:100vh;
+  padding: 18px 12px 40px;
+  backdrop-filter: none;
+}
+
+.siteTitle{
+  text-align:center;
+  text-shadow: 0 8px 30px rgba(0,0,0,0.75);
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+.titleBn{
+  font-size: clamp(20px, 3vw, 38px);
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+.titleEn{
+  font-size: clamp(12px, 1.6vw, 18px);
+  opacity: 0.95;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* Clock card */
+.clockCard{
+  width: min(720px, 92vw);
+  margin: 0 auto;
+  text-align:center;
+  border-radius: 22px;
+  padding: 18px 16px 14px;
+  background: linear-gradient(135deg, rgba(142,45,226,0.92), rgba(74,0,224,0.92));
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+}
+
+.clockTime{
+  font-size: clamp(34px, 5vw, 64px);
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.clockDate{
+  margin-top: 6px;
+  font-weight: 700;
+  opacity: 0.95;
+}
+
+.clockHijri{
+  margin-top: 4px;
+  font-size: 13px;
+  opacity: 0.95;
+}
+
+.nextPrayer{
+  margin: 14px auto 10px;
+  width: min(640px, 92vw);
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(0,255,204,0.95), rgba(0,102,255,0.95));
+  color: #08121f;
+  font-weight: 900;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+}
+
+.btnRow{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top: 8px;
+}
+
+.btn{
+  border:none;
+  cursor:pointer;
+  border-radius: 999px;
+  padding: 9px 14px;          /* SMALLER buttons */
+  font-size: 14px;            /* SMALLER buttons */
+  font-weight: 800;
+  color: #fff;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.25);
+}
+
+.btnRed{ background: linear-gradient(45deg,#ff512f,#dd2476); }
+.btnBlue{ background: linear-gradient(45deg,#00c6ff,#0072ff); }
+.btnGray{ background: linear-gradient(45deg,#404040,#1f1f1f); }
+
+/* Prayer list panel */
+.prayerPanel{
+  width: min(980px, 96vw);
+  margin: 14px auto 0;
+  padding: 12px;
+  background: rgba(0,0,0,0.18);
+  border-radius: 18px;
+  backdrop-filter: blur(2px);
+}
+
+.prayerList{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.prRow{
+  position: relative;
+  display:grid;
+  grid-template-columns: 1fr 140px 90px; /* name | time | offset */
+  gap: 10px;
+  align-items:center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.10);
+  overflow:hidden;
+}
+
+.prRow.active::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: var(--purple); /* purple bar like screenshot */
+  opacity: 0.75;
+}
+
+.prRow > *{
+  position: relative;
+  z-index: 2;
+}
+
+.prName{
+  display:flex;
+  align-items:baseline;
+  gap: 12px;
+  justify-content:flex-start;
+}
+
+.prName .en{
+  font-size: 22px;
+  font-weight: 900;
+  opacity: 0.95;
+}
+
+.prName .bn{
+  font-size: 16px;
+  font-weight: 800;
+  opacity: 0.95;
+}
+
+.prTime{
+  text-align:center;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: .5px;
+}
+
+.prOff{
+  text-align:right;
+  font-weight: 900;
+  opacity: 0.95;
+}
+
+/* sunrise/sunset + jumua */
+.sideTimes{
+  display:flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.sideTimeBox{
+  flex:1;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.30);
+  border: 1px solid rgba(255,255,255,0.10);
+  text-align:center;
+}
+
+.sideLabel{ font-weight: 900; opacity: 0.95; }
+.sideValue{ margin-top: 6px; font-size: 22px; font-weight: 900; }
+
+.jumuaBox{
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.30);
+  border: 1px solid rgba(255,255,255,0.10);
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+}
+
+.jumuaLabel{ font-weight: 900; font-size: 18px; }
+.jumuaValue{ font-weight: 900; font-size: 22px; }
+
+/* Ramadan */
+.ramadanWrap{
+  width:min(980px, 96vw);
+  margin: 16px auto 0;
+  text-align:center;
+  background: rgba(0,0,0,0.25);
+  border-radius: 18px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.ramadanTitle{
+  font-weight: 900;
+  font-size: 22px;
+  margin-bottom: 10px;
+  text-shadow: 0 10px 25px rgba(0,0,0,0.65);
+}
+
+.ramadanPoster{
+  width: 100%;
+  max-width: 900px;
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+}
+
+/* Modal */
+.hidden{ display:none; }
+
+.modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,0.85);   /* darker overlay */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+
+  z-index: 9999;
+}
+.modalBox{
+  width: min(720px, 96vw);
+
+  border-radius: 16px;
+  background: #121212;   /* solid background */
+
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+
+  padding: 12px;
+
+  max-height: 85vh;
+  overflow-y: auto;
+}
+.modalHeader{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  gap: 10px;
+}
+
+.modalTitle{
+  font-weight: 900;
+  font-size: 16px;
+}
+
+.xBtn{
+  border:none;
+  cursor:pointer;
+  border-radius: 12px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+  font-weight: 900;
+}
+
+.settingsGrid{
+  margin-top: 12px;
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 640px){
+  .prRow{ grid-template-columns: 1fr 120px 70px; }
+  .prTime{ font-size: 22px; }
+  .settingsGrid{ grid-template-columns: 1fr; }
+}
+
+.setRow{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px;
+}
+
+.setName{
+  font-weight: 900;
+  display:flex;
+  gap: 10px;
+  align-items:baseline;
+}
+
+.setName .bn{ opacity: 0.95; }
+.setName .en{ opacity: 0.85; font-size: 12px; }
+
+.setCtrl{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+
+.stepBtn{
+  width: 34px;
+  height: 34px;
+  border:none;
+  cursor:pointer;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.14);
+  color: #fff;
+  font-weight: 900;
+}
+
+.valBox{
+  min-width: 60px;
+  text-align:center;
+  padding: 6px 10px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.10);
+  font-weight: 900;
+}
+
+.modalFooter{
+  margin-top: 12px;
+  display:flex;
+  justify-content:flex-end;
+}
+/* SETTINGS MODAL */
+
+.settingsModal{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+.settingsModal.show{
+  display: flex;
+}
+
+.settingsBox{
+  width: min(720px,95vw);
+  background: #111;
+  border-radius: 16px;
+  padding: 16px;
+
+  border:1px solid rgba(255,255,255,0.15);
+
+  box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+  max-height:85vh;
+  overflow-y:auto;
+}
+
+.settingsHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.settingsTitle{
+  font-weight:900;
+}
+
+.settingsClose{
+  border:none;
+  background:#333;
+  color:white;
+  font-size:18px;
+  border-radius:8px;
+  cursor:pointer;
+  padding:6px 10px;
+}
+
+.settingsFooter{
+  margin-top:12px;
+  display:flex;
+  justify-content:flex-end;
+}
+
+
+
+/* Mobile improvements */
+@media (max-width:600px){
+
+  .clockTime{
+    font-size:40px;
+  }
+
+  .prName .en{
+    font-size:18px;
+  }
+
+  .prTime{
+    font-size:20px;
+  }
+
+  .prRow{
+    grid-template-columns: 1fr 90px 50px;
+  }
+
+}
+
+/* =====================================================
+📊 PROGRESS BAR
+===================================================== */
+
+.progressCard{
+  width:min(980px,96vw);
+  margin:12px auto;
+  background:rgba(0,0,0,0.35);
+  padding:12px;
+  border-radius:14px;
+  text-align:center;
+}
+
+.progressBar{
+  height:12px;
+  background:rgba(255,255,255,0.2);
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+#progressFill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#00ffcc,#0072ff);
+  transition:width 1s linear;
+}
+
+
+/* =====================================================
+📢 NOTICE BOARD
+===================================================== */
+
+.noticeBoard{
+  width:min(980px,96vw);
+  margin:12px auto;
+  padding:14px;
+  border-radius:16px;
+  background:rgba(0,0,0,0.3);
+}
+
+.noticeTitle{
+  font-weight:900;
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+#noticeContent{
+  line-height:1.7;
+  opacity:0.9;
+}
+
+
+/* =====================================================
+🌤 WEATHER WIDGET
+===================================================== */
+
+/* WEATHER */
+
+.weatherBox{
+  position:fixed;
+  top:20px;
+  right:20px;
+
+  background:rgba(0,0,0,0.4);
+  padding:12px 16px;
+  border-radius:14px;
+
+  text-align:center;
+  font-weight:700;
+}
+
+
+/* MOON */
+
+.moonBox{
+  position:fixed;
+  top:120px;   /* pushed lower so it doesn't overlap */
+  right:20px;
+
+  background:rgba(0,0,0,0.4);
+  padding:12px 16px;
+  border-radius:14px;
+
+  text-align:center;
+  font-weight:700;
+}
+
+#weatherIcon{
+  font-size:24px;
+}
+
+#weatherTemp{
+  font-size:18px;
+}
+
+
+#progressFill{
+  height:100%;
+  width:0%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:linear-gradient(90deg,#00ffd0,#0072ff);
+
+  color:white;
+  font-weight:900;
+  font-size:12px;
+
+  transition:width 1s linear;
+}
+
+
+
+#moonIcon{
+  font-size:26px;
+}
+
+#moonText{
+  font-size:14px;
+}
+
+#moonExtra{
+  font-size:12px;
+  opacity:0.9;
+  margin-top:4px;
+}
+
+.ramadanBox{
+  position:fixed;
+  top:220px;
+  right:20px;
+
+  background:rgba(0,0,0,0.45);
+  padding:12px 16px;
+
+  border-radius:14px;
+  width:150px;
+
+  text-align:center;
+  font-weight:700;
+
+  backdrop-filter:blur(6px);
+}
+
+.ramadanTitle{
+  font-weight:900;
+  margin-bottom:6px;
+}
+.mosqueLogo{
+  width:80px;
+  height:auto;
+
+  display:block;
+  margin:0 auto 10px auto;
+
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
+}
