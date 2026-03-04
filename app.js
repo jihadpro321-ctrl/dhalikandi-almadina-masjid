@@ -581,17 +581,14 @@ async function loadWeather(){
 /* =====================================================
 🌙 MOON PHASE (LOCAL CALCULATION – NO API)
 ===================================================== */
-
 function loadMoon(){
 
   const now = new Date();
 
   const synodicMonth = 29.53058867;
-
   const knownNewMoon = new Date("2000-01-06");
 
   const days = (now - knownNewMoon) / (1000*60*60*24);
-
   const phase = (days % synodicMonth) / synodicMonth;
 
   let moonIcon = "🌑";
@@ -622,21 +619,17 @@ function loadMoon(){
   document.getElementById("moonExtra").textContent =
     "Illumination: " + illumination + "%";
 
+  // ✅ FIXED PART
+  let visibility = "কম";
+
+  if(illumination > 20) visibility = "মাঝারি";
+  if(illumination > 40) visibility = "ভাল";
+  if(illumination > 60) visibility = "খুব ভাল";
+
+  document.getElementById("moonVisibility").textContent =
+    "চাঁদ দেখার উপযোগিতা: " + visibility;
+
 }
-
-loadWeather();
-loadMoon();
-
-setInterval(loadWeather,600000);
-setInterval(loadMoon,3600000);
-let visibility = "কম";
-
-if(illumination > 20) visibility = "মাঝারি";
-if(illumination > 40) visibility = "ভাল";
-if(illumination > 60) visibility = "খুব ভাল";
-
-document.getElementById("moonVisibility").textContent =
-"চাঁদ দেখার উপযোগিতা: " + visibility;
 
 
 /* =====================================================
