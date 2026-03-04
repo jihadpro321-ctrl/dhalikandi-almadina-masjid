@@ -278,6 +278,7 @@ function renderUI(t){
 
   // Auto Adhan
 autoAdhan(schedule);
+checkPrayerAnnouncements(schedule);
 updateProgress(schedule, next);
 loadRamadanInfo(t);
 }
@@ -668,6 +669,8 @@ const MOSQUE_MESSAGES = [
 function loadMosqueMessages(){
 
   const box = document.getElementById("noticeContent");
+
+  if(!box) return;
 
   box.innerHTML = MOSQUE_MESSAGES
     .map(m => `<div>• ${m}</div>`)
