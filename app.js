@@ -104,18 +104,17 @@ setInterval(updateClock, 1000);
 updateClock();
 
 // ===== Audio unlock + enable =====
-const adhanAudio = document.getElementById("adhanAudio");
 document.getElementById("adhanBtn").onclick = async () => {
+
   adhanEnabled = true;
 
-  // unlock autoplay by user gesture
-  try{
+  try {
     await adhanAudio.play();
     adhanAudio.pause();
     adhanAudio.currentTime = 0;
-  }catch(e){}
+  } catch {}
 
-  alert("✅ Adhan Enabled! এখন থেকে ওয়াক্ত হলে অটো বাজবে।");
+  alert("Adhan enabled. It will play automatically.");
 };
 
 // ===== SETTINGS SYSTEM =====
@@ -312,19 +311,19 @@ function buildLocalDateFromHHMM(hhmm, offMin = 0) {
 }
 
     // play once when within 2 seconds of prayer time
-    if(!playedKeys[key] && Math.abs(now.getTime() - when.getTime()) <= 2000){
+    if(!playedKeys[key] && Math.abs(now.getTime() - when.getTime()) <= 30000){
       try{
         adhanAudio.currentTime = 0;
         adhanAudio.play();
       }catch(e){}
       playedKeys[key] = true;
     }
-  }
-}
+  
+
 
 // ===== Load prayer times from API =====
 async function loadPrayerTimes(){
-  const url = `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=1`;
+  const url = `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=1&timezonestring=Asia/Dhaka`;
   const res = await fetch(url);
   const data = await res.json();
   const t = data.data.timings;
