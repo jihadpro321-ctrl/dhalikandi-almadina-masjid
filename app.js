@@ -737,5 +737,5 @@ function moonSightingAlert(illumination){
   }
 
   MOSQUE_MESSAGES.push(msg);
-
+  loadMosqueMessages();
 }
