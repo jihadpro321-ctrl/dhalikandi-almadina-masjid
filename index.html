@@ -24,6 +24,222 @@
     "address": { "@type": "PostalAddress", "addressCountry": "BD" }
   }
   </script>
+
+  <style>
+    /* ── Mobile progress bar label fix ── */
+    @media (max-width: 600px) {
+      .progressCard { font-size: 11px; }
+      #progressFill { font-size: 8px; padding-right: 3px; }
+      #progressPercent { white-space: nowrap; }
+    }
+    /* ── Moon pill sub text visible ── */
+    .pillSub { display: block !important; }
+
+    /* ── Admin edit section styles (calendar page) ── */
+    .adminNote {
+      display: none; /* hidden from users — only visible in source code */
+    }
+
+    /* ── Islamic info cards (extra content) ── */
+    .infoSection { margin-top: 20px; }
+    .infoSectionTitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 3.5vw, 22px);
+      font-weight: 700; color: var(--gold-lt);
+      margin-bottom: 12px; text-align: center;
+    }
+    .duaCard {
+      padding: 18px 20px;
+      border-radius: var(--r-lg);
+      background: var(--glass);
+      border: 1px solid var(--glass-b);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+      margin-bottom: 10px;
+    }
+    .duaArabic {
+      font-family: 'Amiri', serif;
+      font-size: clamp(16px, 3.5vw, 22px);
+      color: var(--gold-lt);
+      text-align: center;
+      line-height: 2;
+      direction: rtl;
+      margin-bottom: 8px;
+    }
+    .duaTranslit {
+      font-size: clamp(11px, 2vw, 13px);
+      color: rgba(245,236,215,0.65);
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+    .duaMeaning {
+      font-size: clamp(12px, 2.2vw, 14px);
+      color: var(--cream-soft);
+      text-align: center;
+      line-height: 1.7;
+    }
+    .duaLabel {
+      font-size: 10px; font-weight: 700;
+      color: var(--gold); letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px; text-align: center;
+    }
+    .hadithCard {
+      padding: 18px 20px;
+      border-radius: var(--r-lg);
+      background: linear-gradient(145deg, rgba(8,44,32,0.80), rgba(12,62,46,0.60));
+      border: 1px solid rgba(200,151,42,0.22);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+      margin-bottom: 10px;
+    }
+    .hadithText {
+      font-family: 'Amiri', serif;
+      font-size: clamp(14px, 3vw, 18px);
+      color: var(--cream);
+      line-height: 1.9;
+      margin-bottom: 8px;
+      direction: rtl; text-align: right;
+    }
+    .hadithTranslation {
+      font-size: clamp(12px, 2.2vw, 14px);
+      color: var(--cream-soft); line-height: 1.7;
+    }
+    .hadithSource {
+      font-size: 11px; color: var(--gold);
+      font-weight: 700; margin-top: 8px;
+      letter-spacing: .3px;
+    }
+    .prayerGuideGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(150px, 42vw), 1fr));
+      gap: 10px; margin-top: 10px;
+    }
+    .prayerGuideCard {
+      padding: 14px 12px;
+      border-radius: var(--r-lg);
+      background: var(--glass);
+      border: 1px solid var(--glass-b);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .pgIcon { font-size: 28px; margin-bottom: 7px; }
+    .pgName { font-family: 'Cormorant Garamond', serif; font-size: clamp(15px, 3vw, 19px); font-weight: 700; color: #fff; }
+    .pgAr   { font-family: 'Amiri', serif; font-size: 14px; color: var(--gold-lt); margin: 3px 0; }
+    .pgRakaat { font-size: 11px; color: rgba(245,236,215,0.55); font-weight: 700; }
+
+    /* Countdown timer style */
+    .countdownCard {
+      padding: 16px 20px;
+      border-radius: var(--r-lg);
+      background: linear-gradient(135deg, rgba(10,54,40,0.88), rgba(5,28,20,0.92));
+      border: 1px solid rgba(200,151,42,0.28);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+      text-align: center; margin-bottom: 10px;
+    }
+    .countdownTitle {
+      font-size: 11px; font-weight: 700;
+      color: var(--gold); letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .countdownTimer {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 6vw, 42px);
+      font-weight: 700; color: #fff;
+      letter-spacing: 2px;
+    }
+    .countdownLabel {
+      font-size: clamp(13px, 2.5vw, 16px);
+      color: var(--gold-lt); font-weight: 700;
+      margin-top: 6px;
+    }
+    .countdownSub {
+      font-size: 11px; color: rgba(245,236,215,0.55);
+      margin-top: 4px;
+    }
+
+    /* Qibla direction card */
+    .qiblaCard {
+      padding: 16px 18px;
+      border-radius: var(--r-lg);
+      background: var(--glass);
+      border: 1px solid var(--glass-b);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+      text-align: center; margin-bottom: 10px;
+    }
+    .qiblaCompass {
+      font-size: 52px; margin: 8px 0;
+      animation: compassSpin 0s linear;
+    }
+    .qiblaInfo { font-size: 13px; color: var(--cream-soft); line-height: 1.7; }
+    .qiblaDeg { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--gold-lt); }
+
+    /* Tasbih counter */
+    .tasbihCard {
+      padding: 16px 18px;
+      border-radius: var(--r-lg);
+      background: linear-gradient(145deg, rgba(8,44,32,0.80), rgba(12,62,46,0.60));
+      border: 1px solid rgba(200,151,42,0.22);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .tasbihCount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 12vw, 72px);
+      font-weight: 700; color: var(--gold-lt);
+      line-height: 1;
+    }
+    .tasbihName { font-size: 13px; color: var(--cream-soft); margin: 6px 0 14px; font-weight: 600; }
+    .tasbihBtns { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .tasbihBtn {
+      border: none; border-radius: var(--r-pill);
+      padding: 10px 20px; font-size: 13px; font-weight: 800;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      cursor: pointer; transition: transform .12s ease;
+    }
+    .tasbihBtn:active { transform: scale(0.94); }
+    .tbCount  { background: linear-gradient(45deg, var(--emerald), var(--emerald-lt)); color: #fff; }
+    .tbReset  { background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.18); color: var(--cream); }
+    .tasbihOptions {
+      display: flex; justify-content: center; gap: 6px;
+      flex-wrap: wrap; margin-top: 12px;
+    }
+    .tasbihOpt {
+      border: 1px solid rgba(200,151,42,0.22);
+      background: rgba(255,255,255,0.05);
+      border-radius: var(--r-pill);
+      padding: 5px 12px; font-size: 11px; font-weight: 700;
+      color: rgba(245,236,215,0.65); cursor: pointer;
+      transition: all .15s;
+    }
+    .tasbihOpt.active, .tasbihOpt:hover {
+      background: var(--gold-pale); color: var(--gold-lt);
+      border-color: rgba(200,151,42,0.40);
+    }
+    .tasbihTarget { font-size: 11px; color: var(--gold); margin-top: 8px; font-weight: 700; }
+
+    /* Islamic tips */
+    .tipCard {
+      padding: 14px 16px;
+      border-radius: var(--r-md);
+      background: rgba(200,151,42,0.08);
+      border-left: 3px solid var(--gold);
+      margin-bottom: 8px;
+    }
+    .tipText { font-size: clamp(12px, 2.2vw, 14px); color: var(--cream-soft); line-height: 1.7; }
+    .tipSource { font-size: 11px; color: var(--gold); font-weight: 700; margin-top: 5px; }
+  </style>
 </head>
 <body>
 <div id="app">
@@ -59,14 +275,14 @@
         <span class="pillIcon" id="mWeatherIcon">☀️</span>
         <div class="pillInfo">
           <span class="pillMain" id="mWeatherTemp">--°C</span>
-          <span class="pillSub">Dhaka</span>
+          <span class="pillSub" id="mWeatherDesc">Dhaka</span>
         </div>
       </div>
       <div class="infoPill">
         <span class="pillIcon" id="mMoonIcon">🌙</span>
         <div class="pillInfo">
           <span class="pillMain" id="mMoonText">Moon</span>
-          <span class="pillSub" id="mMoonExtra">--% illuminated</span>
+          <span class="pillSub" id="mMoonSub">--</span>
         </div>
       </div>
     </div>
@@ -137,7 +353,7 @@
         </div>
       </div>
 
-      <!-- Ramadan -->
+      <!-- Ramadan poster -->
       <div class="ramadanWrap">
         <div class="ramadanTitle">রমজান সেহরি ও ইফতার ক্যালেন্ডার</div>
         <img class="ramadanPoster" src="ramadan.png.jpeg" alt="Ramadan Calendar">
@@ -152,148 +368,177 @@
   ══════════════════════════════════════════════════════════ -->
   <div id="page-calendar" class="page">
     <div class="calPage">
-      <div class="pageHeading">ইসলামিক ক্যালেন্ডার</div>
-      <div class="pageSubheading">Islamic Hijri Calendar</div>
 
-      <!-- Hijri months -->
-      <div class="hijriGrid">
-        <div class="hijriCard">
-          <div class="hijriNum">১</div>
-          <div class="hijriEn">Muharram</div>
-          <div class="hijriAr">محرم</div>
-          <div class="hijriDays">30 days · Sacred</div>
-        </div>
-        <div class="hijriCard">
-          <div class="hijriNum">২</div>
-          <div class="hijriEn">Safar</div>
-          <div class="hijriAr">صفر</div>
-          <div class="hijriDays">29 days</div>
-        </div>
-        <div class="hijriCard">
-          <div class="hijriNum">৩</div>
-          <div class="hijriEn">Rabi' al-Awwal</div>
-          <div class="hijriAr">ربيع الأول</div>
-          <div class="hijriDays">30 days · Prophet's birth</div>
-        </div>
-        <div class="hijriCard">
-          <div class="hijriNum">৪</div>
-          <div class="hijriEn">Rabi' al-Thani</div>
-          <div class="hijriAr">ربيع الآخر</div>
-          <div class="hijriDays">29 days</div>
-        </div>
-        <div class="hijriCard">
-          <div class="hijriNum">৫</div>
-          <div class="hijriEn">Jumada al-Ula</div>
-          <div class="hijriAr">جمادى الأولى</div>
-          <div class="hijriDays">30 days</div>
-        </div>
-        <div class="hijriCard">
-          <div class="hijriNum">৬</div>
-          <div class="hijriEn">Jumada al-Akhira</div>
-          <div class="hijriAr">جمادى الآخرة</div>
-          <div class="hijriDays">29 days</div>
-        </div>
-        <div class="hijriCard">
-          <div class="hijriNum">৭</div>
-          <div class="hijriEn">Rajab</div>
-          <div class="hijriAr">رجب</div>
-          <div class="hijriDays">30 days · Sacred</div>
-        </div>
-        <div class="hijriCard">
-          <div class="hijriNum">৮</div>
-          <div class="hijriEn">Sha'ban</div>
-          <div class="hijriAr">شعبان</div>
-          <div class="hijriDays">29 days · Before Ramadan</div>
-        </div>
-        <div class="hijriCard ramadan-month">
-          <div class="hijriNum">৯</div>
-          <div class="hijriEn">Ramadan</div>
-          <div class="hijriAr">رمضان</div>
-          <div class="hijriDays">30 days · Holy month ☪</div>
-        </div>
-        <div class="hijriCard">
-          <div class="hijriNum">১০</div>
-          <div class="hijriEn">Shawwal</div>
-          <div class="hijriAr">شوال</div>
-          <div class="hijriDays">29 days · Eid al-Fitr</div>
-        </div>
-        <div class="hijriCard">
-          <div class="hijriNum">১১</div>
-          <div class="hijriEn">Dhu al-Qi'dah</div>
-          <div class="hijriAr">ذو القعدة</div>
-          <div class="hijriDays">30 days · Sacred</div>
-        </div>
-        <div class="hijriCard">
-          <div class="hijriNum">১২</div>
-          <div class="hijriEn">Dhu al-Hijjah</div>
-          <div class="hijriAr">ذو الحجة</div>
-          <div class="hijriDays">29/30 days · Hajj · Eid</div>
-        </div>
+      <div class="pageHeading">ইসলামিক ক্যালেন্ডার</div>
+      <div class="pageSubheading">Islamic Hijri Calendar · 1447 AH</div>
+
+      <!-- ════════════════════════════════════════════════════
+           ⬇️  ADMIN EDIT ZONE — Edit dates here easily
+           Change the text inside dateHijri and dateBadge divs
+           to update Islamic event dates anytime.
+      ════════════════════════════════════════════════════ -->
+
+      <!-- Ramadan countdown (auto-calculated by JS below) -->
+      <div class="countdownCard" id="ramadanCountdown">
+        <div class="countdownTitle">🌙 রমজান ১৪৪৭</div>
+        <div class="countdownTimer" id="cdTimer">--d --h --m</div>
+        <div class="countdownLabel" id="cdLabel">লোড হচ্ছে...</div>
+        <div class="countdownSub" id="cdSub"></div>
       </div>
 
-      <!-- Key Islamic dates 1447 AH -->
-      <div class="calDatesTitle">গুরুত্বপূর্ণ ইসলামিক তারিখ ১৪৪৭ AH</div>
-      <div class="datesList">
+      <!-- Key Islamic dates — ADMIN: edit text in dateHijri divs below -->
+      <div class="calDatesTitle">📅 গুরুত্বপূর্ণ ইসলামিক তারিখ</div>
+      <div class="datesList" id="islamicDates">
+
+        <!-- ✏️ ADMIN EDIT: Change dates/text below as needed -->
+
         <div class="dateItem">
           <div class="dateIcon">🌙</div>
           <div class="dateInfo">
             <div class="dateName">রমজান শুরু · Ramadan Begins</div>
-            <div class="dateHijri">১ রমজান ১৪৪৭ | ~১ মার্চ ২০২৬</div>
+            <!-- ✏️ ADMIN: Edit this date -->
+            <div class="dateHijri">১ রমজান ১৪৪৭ | ১৯ ফেব্রুয়ারি ২০২৬</div>
           </div>
-          <div class="dateBadge">চলমান</div>
+          <div class="dateBadge">চলমান ✅</div>
         </div>
+
         <div class="dateItem">
           <div class="dateIcon">🌟</div>
           <div class="dateInfo">
             <div class="dateName">লাইলাতুল কদর · Laylat al-Qadr</div>
-            <div class="dateHijri">২৭ রমজান ১৪৪৭ | ~২৭ মার্চ ২০২৬</div>
+            <!-- ✏️ ADMIN: Edit this date -->
+            <div class="dateHijri">২৭ রমজান ১৪৪৭ | ১৭ মার্চ ২০২৬</div>
           </div>
           <div class="dateBadge">পবিত্র রাত</div>
         </div>
+
         <div class="dateItem">
           <div class="dateIcon">🎉</div>
           <div class="dateInfo">
             <div class="dateName">ঈদুল ফিতর · Eid al-Fitr</div>
-            <div class="dateHijri">১ শাওয়াল ১৪৪৭ | ~৩০ মার্চ ২০২৬</div>
+            <!-- ✏️ ADMIN: Edit this date -->
+            <div class="dateHijri">১ শাওয়াল ১৪৪৭ | ২০ মার্চ ২০২৬ (সম্ভাব্য)</div>
           </div>
-          <div class="dateBadge">ঈদ মোবারক</div>
+          <div class="dateBadge">ঈদ মোবারক 🎊</div>
         </div>
+
         <div class="dateItem">
           <div class="dateIcon">🕋</div>
           <div class="dateInfo">
             <div class="dateName">ঈদুল আযহা · Eid al-Adha</div>
-            <div class="dateHijri">১০ জিলহজ ১৪৪৭ | ~৬ জুন ২০২৬</div>
+            <!-- ✏️ ADMIN: Edit this date -->
+            <div class="dateHijri">১০ জিলহজ ১৪৪৭ | ৬ জুন ২০২৬ (সম্ভাব্য)</div>
           </div>
-          <div class="dateBadge">কোরবানি</div>
+          <div class="dateBadge">কোরবানি 🐑</div>
         </div>
+
         <div class="dateItem">
           <div class="dateIcon">📅</div>
           <div class="dateInfo">
             <div class="dateName">ইসলামিক নববর্ষ · Islamic New Year</div>
-            <div class="dateHijri">১ মহররম ১৪৪৮ | ~২৬ জুন ২০২৬</div>
+            <!-- ✏️ ADMIN: Edit this date -->
+            <div class="dateHijri">১ মহররম ১৪৪৮ | ২৬ জুন ২০২৬ (সম্ভাব্য)</div>
           </div>
           <div class="dateBadge">১৪৪৮ AH</div>
         </div>
+
         <div class="dateItem">
           <div class="dateIcon">🕯️</div>
           <div class="dateInfo">
             <div class="dateName">আশুরা · Day of Ashura</div>
-            <div class="dateHijri">১০ মহররম ১৪৪৮ | ~৫ জুলাই ২০২৬</div>
+            <!-- ✏️ ADMIN: Edit this date -->
+            <div class="dateHijri">১০ মহররম ১৪৪৮ | ৫ জুলাই ২০২৬ (সম্ভাব্য)</div>
           </div>
           <div class="dateBadge">পবিত্র দিন</div>
         </div>
+
+        <div class="dateItem">
+          <div class="dateIcon">🌸</div>
+          <div class="dateInfo">
+            <div class="dateName">শবে মেরাজ · Isra wal Miraj</div>
+            <!-- ✏️ ADMIN: Edit this date -->
+            <div class="dateHijri">২৭ রজব ১৪৪৭ | ২৭ জানুয়ারি ২০২৬</div>
+          </div>
+          <div class="dateBadge">গত ✓</div>
+        </div>
+
+        <div class="dateItem">
+          <div class="dateIcon">💚</div>
+          <div class="dateInfo">
+            <div class="dateName">ঈদে মিলাদুন্নবী · Mawlid</div>
+            <!-- ✏️ ADMIN: Edit this date -->
+            <div class="dateHijri">১২ রবিউল আউয়াল ১৪৪৭ | ১৫ সেপ্টেম্বর ২০২৫</div>
+          </div>
+          <div class="dateBadge">গত ✓</div>
+        </div>
+
       </div>
+      <!-- ════════════════════════════════════════════════════
+           ⬆️  END OF ADMIN EDIT ZONE
+      ════════════════════════════════════════════════════ -->
+
+      <!-- Hijri months reference -->
+      <div class="calDatesTitle" style="margin-top:28px;">🗓️ হিজরি মাসের তালিকা</div>
+      <div class="hijriGrid">
+        <div class="hijriCard"><div class="hijriNum">১</div><div class="hijriEn">Muharram</div><div class="hijriAr">محرم</div><div class="hijriDays">30 days · Sacred</div></div>
+        <div class="hijriCard"><div class="hijriNum">২</div><div class="hijriEn">Safar</div><div class="hijriAr">صفر</div><div class="hijriDays">29 days</div></div>
+        <div class="hijriCard"><div class="hijriNum">৩</div><div class="hijriEn">Rabi' al-Awwal</div><div class="hijriAr">ربيع الأول</div><div class="hijriDays">30 days</div></div>
+        <div class="hijriCard"><div class="hijriNum">৪</div><div class="hijriEn">Rabi' al-Thani</div><div class="hijriAr">ربيع الآخر</div><div class="hijriDays">29 days</div></div>
+        <div class="hijriCard"><div class="hijriNum">৫</div><div class="hijriEn">Jumada al-Ula</div><div class="hijriAr">جمادى الأولى</div><div class="hijriDays">30 days</div></div>
+        <div class="hijriCard"><div class="hijriNum">৬</div><div class="hijriEn">Jumada al-Akhira</div><div class="hijriAr">جمادى الآخرة</div><div class="hijriDays">29 days</div></div>
+        <div class="hijriCard"><div class="hijriNum">৭</div><div class="hijriEn">Rajab</div><div class="hijriAr">رجب</div><div class="hijriDays">30 days · Sacred</div></div>
+        <div class="hijriCard"><div class="hijriNum">৮</div><div class="hijriEn">Sha'ban</div><div class="hijriAr">شعبان</div><div class="hijriDays">29 days</div></div>
+        <div class="hijriCard ramadan-month"><div class="hijriNum">৯</div><div class="hijriEn">Ramadan</div><div class="hijriAr">رمضان</div><div class="hijriDays">30 days · Holy ☪</div></div>
+        <div class="hijriCard"><div class="hijriNum">১০</div><div class="hijriEn">Shawwal</div><div class="hijriAr">شوال</div><div class="hijriDays">29 days · Eid</div></div>
+        <div class="hijriCard"><div class="hijriNum">১১</div><div class="hijriEn">Dhu al-Qi'dah</div><div class="hijriAr">ذو القعدة</div><div class="hijriDays">30 days · Sacred</div></div>
+        <div class="hijriCard"><div class="hijriNum">১২</div><div class="hijriEn">Dhu al-Hijjah</div><div class="hijriAr">ذو الحجة</div><div class="hijriDays">29/30 · Hajj · Eid</div></div>
+      </div>
+
+      <!-- Daily duas section -->
+      <div class="infoSection">
+        <div class="infoSectionTitle">🤲 দৈনন্দিন দোয়া</div>
+
+        <div class="duaCard">
+          <div class="duaLabel">ঘুমানোর আগে দোয়া</div>
+          <div class="duaArabic">بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا</div>
+          <div class="duaTranslit">Bismika Allahumma amutu wa ahya</div>
+          <div class="duaMeaning">হে আল্লাহ, তোমার নামে মরি এবং বাঁচি।</div>
+        </div>
+
+        <div class="duaCard">
+          <div class="duaLabel">ঘুম থেকে উঠে দোয়া</div>
+          <div class="duaArabic">الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ</div>
+          <div class="duaTranslit">Alhamdulillahil-lazi ahyana ba'da ma amatana wa ilayhin-nushur</div>
+          <div class="duaMeaning">সমস্ত প্রশংসা আল্লাহর, যিনি মৃত্যুর পর আমাদের জীবিত করলেন এবং তাঁর কাছেই ফিরে যেতে হবে।</div>
+        </div>
+
+        <div class="duaCard">
+          <div class="duaLabel">খাবার আগে দোয়া</div>
+          <div class="duaArabic">بِسْمِ اللَّهِ وَعَلَى بَرَكَةِ اللَّهِ</div>
+          <div class="duaTranslit">Bismillahi wa 'ala barakatillah</div>
+          <div class="duaMeaning">আল্লাহর নামে এবং আল্লাহর বরকতের উপর ভরসা করে খাচ্ছি।</div>
+        </div>
+
+        <div class="duaCard">
+          <div class="duaLabel">ইফতারের দোয়া</div>
+          <div class="duaArabic">اللَّهُمَّ لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ</div>
+          <div class="duaTranslit">Allahumma laka sumtu wa bika amantu wa 'ala rizqika aftartu</div>
+          <div class="duaMeaning">হে আল্লাহ, তোমার জন্য রোজা রেখেছি, তোমার উপর ঈমান এনেছি এবং তোমার রিযিক দিয়ে ইফতার করছি।</div>
+        </div>
+      </div>
+
     </div>
   </div><!-- /page-calendar -->
 
 
   <!-- ══════════════════════════════════════════════════════
-       PAGE 3 — ABOUT MOSQUE
+       PAGE 3 — ABOUT + TOOLS
   ══════════════════════════════════════════════════════════ -->
   <div id="page-about" class="page">
     <div class="aboutPage">
+
       <div class="pageHeading">আমাদের মসজিদ</div>
-      <div class="pageSubheading">About Our Mosque</div>
+      <div class="pageSubheading">About · Tools · Duas</div>
 
       <!-- Hero -->
       <div class="aboutHero">
@@ -305,69 +550,88 @@
         </div>
       </div>
 
-      <!-- Facilities -->
+      <!-- Facilities grid -->
       <div class="aboutGrid">
-        <div class="aboutCard">
-          <div class="acIcon">🕌</div>
-          <div class="acTitle">পাঁচ ওয়াক্ত নামাজ</div>
-          <div class="acDesc">প্রতিদিন ফজর থেকে এশা পর্যন্ত জামাতে নামাজ</div>
-        </div>
-        <div class="aboutCard">
-          <div class="acIcon">📖</div>
-          <div class="acTitle">কুরআন শিক্ষা</div>
-          <div class="acDesc">শিশু ও বড়দের জন্য কুরআন ও ইসলামিক শিক্ষার ব্যবস্থা</div>
-        </div>
-        <div class="aboutCard">
-          <div class="acIcon">🌙</div>
-          <div class="acTitle">রমজান কার্যক্রম</div>
-          <div class="acDesc">তারাবিহ নামাজ, সেহরি ও ইফতার আয়োজন</div>
-        </div>
-        <div class="aboutCard">
-          <div class="acIcon">🎉</div>
-          <div class="acTitle">ঈদ জামাত</div>
-          <div class="acDesc">ঈদুল ফিতর ও ঈদুল আযহার বিশেষ জামাত</div>
-        </div>
-        <div class="aboutCard">
-          <div class="acIcon">🤝</div>
-          <div class="acTitle">সামাজিক সেবা</div>
-          <div class="acDesc">এলাকার মানুষের জন্য বিভিন্ন সামাজিক কার্যক্রম</div>
-        </div>
-        <div class="aboutCard">
-          <div class="acIcon">📢</div>
-          <div class="acTitle">ঘোষণা বোর্ড</div>
-          <div class="acDesc">মসজিদের সর্বশেষ খবর ও ঘোষণা সবসময় আপডেট</div>
+        <div class="aboutCard"><div class="acIcon">🕌</div><div class="acTitle">পাঁচ ওয়াক্ত নামাজ</div><div class="acDesc">প্রতিদিন ফজর থেকে এশা পর্যন্ত জামাতে নামাজ</div></div>
+        <div class="aboutCard"><div class="acIcon">📖</div><div class="acTitle">কুরআন শিক্ষা</div><div class="acDesc">শিশু ও বড়দের জন্য কুরআন ও ইসলামিক শিক্ষার ব্যবস্থা</div></div>
+        <div class="aboutCard"><div class="acIcon">🌙</div><div class="acTitle">রমজান কার্যক্রম</div><div class="acDesc">তারাবিহ নামাজ, সেহরি ও ইফতার আয়োজন</div></div>
+        <div class="aboutCard"><div class="acIcon">🎉</div><div class="acTitle">ঈদ জামাত</div><div class="acDesc">ঈদুল ফিতর ও ঈদুল আযহার বিশেষ জামাত</div></div>
+        <div class="aboutCard"><div class="acIcon">🤝</div><div class="acTitle">সামাজিক সেবা</div><div class="acDesc">এলাকার মানুষের জন্য বিভিন্ন সামাজিক কার্যক্রম</div></div>
+        <div class="aboutCard"><div class="acIcon">📢</div><div class="acTitle">ঘোষণা বোর্ড</div><div class="acDesc">মসজিদের সর্বশেষ খবর ও ঘোষণা সবসময় আপডেট</div></div>
+      </div>
+
+      <!-- Qibla direction -->
+      <div class="infoSectionTitle">🧭 কিবলার দিক (ঢাকা থেকে)</div>
+      <div class="qiblaCard">
+        <div style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;">কিবলা দিকনির্দেশনা</div>
+        <div class="qiblaCompass">🧭</div>
+        <div class="qiblaDeg">278.4°</div>
+        <div class="qiblaInfo">
+          ঢাকা থেকে কাবার দিক উত্তর-পশ্চিমে <strong style="color:var(--gold-lt)">278.4°</strong> (পশ্চিম থেকে সামান্য উত্তরে)<br>
+          কম্পাসে পশ্চিমে মুখ করে সামান্য ডানদিকে ঘুরুন।
         </div>
       </div>
 
+      <!-- Prayer rakaat guide -->
+      <div class="infoSectionTitle" style="margin-top:20px;">🕌 নামাজের রাকাত সংখ্যা</div>
+      <div class="prayerGuideGrid">
+        <div class="prayerGuideCard"><div class="pgIcon">🌅</div><div class="pgName">Fajr</div><div class="pgAr">فجر</div><div class="pgRakaat">২ ফরজ · ২ সুন্নত</div></div>
+        <div class="prayerGuideCard"><div class="pgIcon">☀️</div><div class="pgName">Dhuhr</div><div class="pgAr">ظهر</div><div class="pgRakaat">৪ ফরজ · ৪+২ সুন্নত</div></div>
+        <div class="prayerGuideCard"><div class="pgIcon">🌤️</div><div class="pgName">Asr</div><div class="pgAr">عصر</div><div class="pgRakaat">৪ ফরজ · ৪ সুন্নত</div></div>
+        <div class="prayerGuideCard"><div class="pgIcon">🌇</div><div class="pgName">Maghrib</div><div class="pgAr">مغرب</div><div class="pgRakaat">৩ ফরজ · ২ সুন্নত</div></div>
+        <div class="prayerGuideCard"><div class="pgIcon">🌙</div><div class="pgName">Isha</div><div class="pgAr">عشاء</div><div class="pgRakaat">৪ ফরজ · ২+২ সুন্নত</div></div>
+        <div class="prayerGuideCard"><div class="pgIcon">🕌</div><div class="pgName">Jumu'ah</div><div class="pgAr">جمعة</div><div class="pgRakaat">২ ফরজ · ৪+২ সুন্নত</div></div>
+      </div>
+
+      <!-- Tasbih counter tool -->
+      <div class="infoSectionTitle" style="margin-top:20px;">📿 তাসবিহ কাউন্টার</div>
+      <div class="tasbihCard">
+        <div class="tasbihCount" id="tasbihCount">0</div>
+        <div class="tasbihName" id="tasbihName">سُبْحَانَ اللَّهِ — সুবহানআল্লাহ</div>
+        <div class="tasbihTarget" id="tasbihTarget">০ / ৩৩</div>
+        <div class="tasbihBtns">
+          <button class="tasbihBtn tbCount" onclick="tasbihTap()">+১ গণনা</button>
+          <button class="tasbihBtn tbReset" onclick="tasbihReset()">↺ রিসেট</button>
+        </div>
+        <div class="tasbihOptions">
+          <button class="tasbihOpt active" onclick="setTasbih(0,this)">سُبْحَانَ اللَّهِ</button>
+          <button class="tasbihOpt" onclick="setTasbih(1,this)">اَلْحَمْدُلِلَّهِ</button>
+          <button class="tasbihOpt" onclick="setTasbih(2,this)">اللَّهُ أَكْبَرُ</button>
+          <button class="tasbihOpt" onclick="setTasbih(3,this)">لَا إِلَهَ إِلَّا اللَّهُ</button>
+        </div>
+      </div>
+
+      <!-- Islamic tips -->
+      <div class="infoSectionTitle" style="margin-top:20px;">💡 ইসলামিক টিপস</div>
+
+      <div class="hadithCard">
+        <div class="hadithText">مَنْ صَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ</div>
+        <div class="hadithTranslation">যে ব্যক্তি ঈমানের সাথে ও সওয়াবের আশায় রমজানের রোজা রাখে, তার পূর্ববর্তী সব গুনাহ মাফ করে দেওয়া হয়।</div>
+        <div class="hadithSource">— সহীহ বুখারী ও মুসলিম</div>
+      </div>
+
+      <div class="tipCard"><div class="tipText">🕌 নামাজের আগে অজু করুন এবং পরিষ্কার কাপড় পরুন।</div></div>
+      <div class="tipCard"><div class="tipText">📖 প্রতিদিন কুরআনের অন্তত একটি আয়াত পড়ুন।</div></div>
+      <div class="tipCard"><div class="tipText">🤲 ফজর ও মাগরিবের পর আয়াতুল কুরসি পড়ুন।</div></div>
+      <div class="tipCard"><div class="tipText">🌙 রমজানে তারাবিহ নামাজ পড়ুন — এটি সুন্নত।</div></div>
+      <div class="tipCard"><div class="tipText">💝 প্রতিদিন কমপক্ষে ১০০ বার দরুদ শরিফ পড়ুন।</div></div>
+
       <!-- Map -->
-      <div class="mapCard">
+      <div class="mapCard" style="margin-top:16px;">
         <div class="mapTitle">📍 মসজিদের অবস্থান</div>
         <a class="mapBtn"
            href="https://www.google.com/maps/search/?api=1&query=Dhali+Kandi+Jam-E+Mashjid+Hazratpur+Bangladesh"
-           target="_blank" rel="noopener">
-          🗺️ Google Maps এ দেখুন
-        </a>
+           target="_blank" rel="noopener">🗺️ Google Maps এ দেখুন</a>
       </div>
 
       <!-- Contact -->
       <div class="contactInfo">
         <div class="ciTitle">📞 যোগাযোগ</div>
-        <div class="ciRow">
-          <span class="ciIcon">🕌</span>
-          <span class="ciText">ঢালিকান্দি আল-মদিনা জামে মসজিদ, হযরতপুর, বাংলাদেশ</span>
-        </div>
-        <div class="ciRow">
-          <span class="ciIcon">🌐</span>
-          <span class="ciText">dhalikandi-almadina-masjid.vercel.app</span>
-        </div>
-        <div class="ciRow">
-          <span class="ciIcon">🕐</span>
-          <span class="ciText">নামাজের সময় অনুযায়ী মসজিদ খোলা থাকে</span>
-        </div>
-        <div class="ciRow">
-          <span class="ciIcon">📅</span>
-          <span class="ciText">জুম্মার নামাজ: প্রতি শুক্রবার, যোহরের সময়</span>
-        </div>
+        <!-- ✏️ ADMIN: Edit contact info below -->
+        <div class="ciRow"><span class="ciIcon">🕌</span><span class="ciText">ঢালিকান্দি আল-মদিনা জামে মসজিদ, হযরতপুর, বাংলাদেশ</span></div>
+        <div class="ciRow"><span class="ciIcon">🌐</span><span class="ciText">dhalikandi-almadina-masjid.vercel.app</span></div>
+        <div class="ciRow"><span class="ciIcon">🕐</span><span class="ciText">নামাজের সময় অনুযায়ী মসজিদ খোলা থাকে</span></div>
+        <div class="ciRow"><span class="ciIcon">📅</span><span class="ciText">জুম্মার নামাজ: প্রতি শুক্রবার, যোহরের সময়</span></div>
       </div>
 
     </div>
@@ -407,45 +671,135 @@
 
 <script src="app.js"></script>
 <script>
-/* ── Page navigation ── */
+/* ══════════════════════════════════════════════════════════
+   PAGE NAVIGATION
+══════════════════════════════════════════════════════════ */
 function showPage(id, btn) {
-  /* pages */
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
-  /* top nav */
-  document.querySelectorAll('.topNav .navBtn').forEach(b => b.classList.remove('active'));
-  /* bottom nav */
-  document.querySelectorAll('.bottomNav .navBtn').forEach(b => b.classList.remove('active'));
-  /* activate clicked (works for both navbars since onclick passes `this`) */
+  document.querySelectorAll('.topNav .navBtn, .bottomNav .navBtn').forEach(b => b.classList.remove('active'));
   if (btn) {
     btn.classList.add('active');
-    /* mirror to the other nav */
     const idx = [...btn.parentElement.children].indexOf(btn);
-    const other = btn.closest('.topNav')
-      ? document.querySelectorAll('.bottomNav .navBtn')[idx]
-      : document.querySelectorAll('.topNav .navBtn')[idx];
-    if (other) other.classList.add('active');
+    const others = btn.closest('.topNav')
+      ? document.querySelectorAll('.bottomNav .navBtn')
+      : document.querySelectorAll('.topNav .navBtn');
+    if (others[idx]) others[idx].classList.add('active');
   }
-  /* scroll to top */
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ── Mirror weather/moon to mobile pills ── */
+/* ══════════════════════════════════════════════════════════
+   MOBILE WEATHER + MOON PILL SYNC
+   Reads from the hidden desktop boxes that app.js updates
+══════════════════════════════════════════════════════════ */
 function syncMobilePills() {
   const wi = document.getElementById('weatherIcon');
   const wt = document.getElementById('weatherTemp');
   const mi = document.getElementById('moonIcon');
   const mt = document.getElementById('moonText');
   const me = document.getElementById('moonExtra');
+  const mv = document.getElementById('moonVisibility');
+
   if (wi) document.getElementById('mWeatherIcon').textContent = wi.textContent;
   if (wt) document.getElementById('mWeatherTemp').textContent = wt.textContent;
   if (mi) document.getElementById('mMoonIcon').textContent = mi.textContent;
   if (mt) document.getElementById('mMoonText').textContent = mt.textContent;
-  if (me) document.getElementById('mMoonExtra').textContent = me.textContent;
+
+  // Moon sub: show "illumination% · visibility text"
+  const extraText  = me ? me.textContent : '';
+  const visibText  = mv ? mv.textContent : '';
+  const moonSub = [extraText, visibText].filter(Boolean).join(' · ');
+  document.getElementById('mMoonSub').textContent = moonSub || '--';
 }
-/* Poll every 2s to sync after app.js updates them */
 setInterval(syncMobilePills, 2000);
 setTimeout(syncMobilePills, 800);
+setTimeout(syncMobilePills, 3000); // extra attempt after app.js fully loads
+
+/* ══════════════════════════════════════════════════════════
+   RAMADAN COUNTDOWN
+   ✏️ ADMIN: Change RAMADAN_START date if needed
+══════════════════════════════════════════════════════════ */
+const RAMADAN_START = new Date('2026-02-19T00:00:00+06:00'); // ✏️ 19 Feb 2026 Bangladesh time
+const RAMADAN_END   = new Date('2026-03-20T00:00:00+06:00'); // ✏️ Approximate Eid al-Fitr
+
+function updateRamadanCountdown() {
+  const now = new Date();
+  const timer   = document.getElementById('cdTimer');
+  const label   = document.getElementById('cdLabel');
+  const sub     = document.getElementById('cdSub');
+  const card    = document.getElementById('ramadanCountdown');
+
+  if (now < RAMADAN_START) {
+    const diff = RAMADAN_START - now;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    timer.textContent = `${d}d ${h}h ${m}m`;
+    label.textContent = 'রমজান শুরু হতে বাকি';
+    sub.textContent   = '১ রমজান ১৪৪৭ · ১৯ ফেব্রুয়ারি ২০২৬';
+  } else if (now < RAMADAN_END) {
+    const diff = RAMADAN_END - now;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    // Current ramadan day
+    const dayNum = Math.floor((now - RAMADAN_START) / 86400000) + 1;
+    timer.textContent = `${d}d ${h}h ${m}m`;
+    label.textContent = `রমজান চলছে — ${dayNum} তম দিন 🌙`;
+    sub.textContent   = 'ঈদুল ফিতর পর্যন্ত বাকি';
+    card.style.background = 'linear-gradient(135deg, rgba(13,107,79,0.80), rgba(6,58,42,0.90))';
+  } else {
+    timer.textContent = '🎉 ঈদ মোবারক!';
+    label.textContent = 'রমজান ১৪৪৭ সম্পন্ন';
+    sub.textContent   = 'আল্লাহ আমাদের সবার রোজা কবুল করুন। আমিন।';
+  }
+}
+updateRamadanCountdown();
+setInterval(updateRamadanCountdown, 60000);
+
+/* ══════════════════════════════════════════════════════════
+   TASBIH COUNTER
+══════════════════════════════════════════════════════════ */
+const TASBIH_LIST = [
+  { ar: 'سُبْحَانَ اللَّهِ',       bn: 'সুবহানআল্লাহ',    target: 33 },
+  { ar: 'اَلْحَمْدُلِلَّهِ',      bn: 'আলহামদুলিল্লাহ',   target: 33 },
+  { ar: 'اللَّهُ أَكْبَرُ',        bn: 'আল্লাহু আকবার',    target: 34 },
+  { ar: 'لَا إِلَهَ إِلَّا اللَّهُ', bn: 'লা ইলাহা ইল্লাল্লাহ', target: 100 },
+];
+let tasbihIdx = 0;
+let tasbihCnt = 0;
+
+function tasbihTap() {
+  tasbihCnt++;
+  const t = TASBIH_LIST[tasbihIdx];
+  document.getElementById('tasbihCount').textContent = tasbihCnt;
+  document.getElementById('tasbihTarget').textContent = `${tasbihCnt} / ${t.target}`;
+  if (tasbihCnt >= t.target) {
+    document.getElementById('tasbihCount').style.color = 'var(--gold-lt)';
+    // subtle pulse
+    const el = document.getElementById('tasbihCount');
+    el.style.transform = 'scale(1.1)';
+    setTimeout(() => el.style.transform = 'scale(1)', 200);
+  }
+}
+function tasbihReset() {
+  tasbihCnt = 0;
+  document.getElementById('tasbihCount').textContent = '0';
+  document.getElementById('tasbihCount').style.color = 'var(--gold-lt)';
+  document.getElementById('tasbihTarget').textContent = `০ / ${TASBIH_LIST[tasbihIdx].target}`;
+}
+function setTasbih(idx, btn) {
+  tasbihIdx = idx;
+  tasbihCnt = 0;
+  const t = TASBIH_LIST[idx];
+  document.getElementById('tasbihCount').textContent = '0';
+  document.getElementById('tasbihCount').style.color = 'var(--gold-lt)';
+  document.getElementById('tasbihName').textContent = `${t.ar} — ${t.bn}`;
+  document.getElementById('tasbihTarget').textContent = `০ / ${t.target}`;
+  document.querySelectorAll('.tasbihOpt').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
 </script>
 </body>
 </html>
