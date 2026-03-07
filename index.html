@@ -6,7 +6,7 @@
 
   <title>ঢালিকান্দি আল-মদিনা জামে মসজিদ | DhaliKandi Al-Madina Jame Masjid</title>
   <meta name="description" content="ঢালিকান্দি আল-মদিনা জামে মসজিদ। নামাজের সময়সূচি, আজান, রমজান সেহরি ও ইফতার ক্যালেন্ডার এবং ইসলামিক তথ্য।">
-  <meta name="theme-color" content="#07130E" />
+  <meta name="theme-color" content="#04100A" />
 
   <link rel="icon" href="favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
@@ -31,7 +31,7 @@
 <body>
 <div class="overlay">
 
-  <!-- ══ WEATHER + MOON (fixed top-right) ══ -->
+  <!-- ══ WEATHER + MOON — fixed top-right ══════════════════ -->
   <div class="weatherBox">
     <div id="weatherIcon">☀️</div>
     <div id="weatherTemp">--°C</div>
@@ -40,19 +40,19 @@
 
   <div class="moonBox">
     <div id="moonIcon">🌙</div>
-    <div id="moonText">Moon Phase</div>
+    <div id="moonText">Moon</div>
     <div id="moonExtra"></div>
     <div id="moonVisibility"></div>
   </div>
 
-  <!-- ══ SITE TITLE ══ -->
+  <!-- ══ SITE TITLE ════════════════════════════════════════ -->
   <div class="siteTitle">
     <img src="logo.png" class="mosqueLogo" alt="Masjid Logo">
     <div class="titleBn">ঢালিকান্দি আল-মদিনা জামে মসজিদ</div>
     <div class="titleEn">Dhalikandi Al-Madina Jame Masjid</div>
   </div>
 
-  <!-- ══ CLOCK CARD ══ -->
+  <!-- ══ CLOCK CARD ════════════════════════════════════════ -->
   <div class="clockCard">
     <div id="clock"  class="clockTime">--:--:--</div>
     <div id="date"   class="clockDate">---</div>
@@ -61,7 +61,7 @@
     <div id="nextPrayer" class="nextPrayer">Loading...</div>
 
     <div class="btnRow">
-      <button id="adhanBtn"   class="btn btnRed">🔊 Adhan Enable</button>
+      <button id="adhanBtn"    class="btn btnRed">🔊 Adhan Enable</button>
       <a class="btn btnBlue"
          href="https://www.google.com/maps/search/?api=1&query=Dhali+Kandi+Jam-E+Mashjid+Hazratpur+Bangladesh"
          target="_blank" rel="noopener">📍 মসজিদটি খুঁজুন</a>
@@ -69,55 +69,65 @@
     </div>
   </div>
 
-  <!-- ══ PRAYER PANEL ══ -->
-  <div class="prayerPanel">
+  <!-- ══ PAGE BODY — two-column on desktop ═════════════════ -->
+  <div class="pageBody">
 
-    <!-- Prayer rows rendered by app.js -->
-    <div id="prayerList" class="prayerList"></div>
+    <!-- LEFT: Prayer list -->
+    <div class="prayerPanel">
+      <div id="prayerList" class="prayerList"></div>
+    </div>
 
-    <!-- Sunrise / Sunset -->
-    <div class="sideTimes">
-      <div class="sideTimeBox">
-        <div class="sideLabel">সূর্যোদয়</div>
-        <div id="sunriseTime" class="sideValue">--:--</div>
+    <!-- RIGHT: Sidebar cards -->
+    <div class="sidebar">
+
+      <!-- Sunrise / Sunset -->
+      <div class="sideCard">
+        <div class="sideCardTitle">☀️ সূর্যোদয় · সূর্যাস্ত</div>
+        <div class="sideTimes">
+          <div class="sideTimeBox">
+            <div class="sideLabel">সূর্যোদয়</div>
+            <div id="sunriseTime" class="sideValue">--:--</div>
+          </div>
+          <div class="sideTimeBox">
+            <div class="sideLabel">সূর্যাস্ত</div>
+            <div id="sunsetTime" class="sideValue">--:--</div>
+          </div>
+        </div>
       </div>
-      <div class="sideTimeBox">
-        <div class="sideLabel">সূর্যাস্ত</div>
-        <div id="sunsetTime" class="sideValue">--:--</div>
+
+      <!-- Jumu'ah -->
+      <div id="jumuaBox" class="jumuaBox">
+        <div class="jumuaLabel">🕌 জুম্মা</div>
+        <div id="jumuaTime" class="jumuaValue">--:--</div>
+      </div>
+
+      <!-- Notice board (on desktop, sits in sidebar) -->
+      <div class="noticeBoard">
+        <h3>📢 মসজিদের ঘোষণা</h3>
+        <div id="noticeContent"></div>
+      </div>
+
+    </div><!-- /sidebar -->
+
+    <!-- PROGRESS BAR — full width below both columns -->
+    <div class="progressCard">
+      <div>পরবর্তী নামাজ পর্যন্ত সময়</div>
+      <div class="progressBar">
+        <div id="progressFill">
+          <span id="progressPercent">0%</span>
+        </div>
       </div>
     </div>
 
-    <!-- Jumu'ah -->
-    <div id="jumuaBox" class="jumuaBox">
-      <div class="jumuaLabel">জুম্মা</div>
-      <div id="jumuaTime" class="jumuaValue">--:--</div>
+    <!-- RAMADAN -->
+    <div class="ramadanWrap">
+      <div class="ramadanTitle">রমজান সেহরি ও ইফতার ক্যালেন্ডার</div>
+      <img class="ramadanPoster" src="ramadan.png.jpeg" alt="Ramadan Calendar">
     </div>
 
-  </div>
+  </div><!-- /pageBody -->
 
-  <!-- ══ PROGRESS BAR ══ -->
-  <div class="progressCard">
-    <div>পরবর্তী নামাজ পর্যন্ত সময়</div>
-    <div class="progressBar">
-      <div id="progressFill">
-        <span id="progressPercent">0%</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ NOTICE BOARD ══ -->
-  <div class="noticeBoard">
-    <h3>📢 মসজিদের ঘোষণা</h3>
-    <div id="noticeContent"></div>
-  </div>
-
-  <!-- ══ RAMADAN SECTION ══ -->
-  <div class="ramadanWrap">
-    <div class="ramadanTitle">রমজান সেহরি ও ইফতার ক্যালেন্ডার</div>
-    <img class="ramadanPoster" src="ramadan.png.jpeg" alt="Ramadan Calendar">
-  </div>
-
-  <!-- ══ SETTINGS MODAL ══ -->
+  <!-- ══ SETTINGS MODAL ════════════════════════════════════ -->
   <div id="settingsModal" class="settingsModal">
     <div class="settingsBox">
       <div class="settingsHeader">
@@ -126,7 +136,7 @@
       </div>
       <div id="settingsGrid" class="settingsGrid"></div>
       <div class="settingsFooter">
-        <button id="resetOffsets" class="btn btnGray">Reset</button>
+        <button id="resetOffsets" class="btn btnGray">↺ Reset</button>
       </div>
     </div>
   </div>
@@ -134,7 +144,6 @@
   <audio id="adhanAudio" src="Abdul-Basit.mp3" preload="auto"></audio>
 
 </div><!-- /.overlay -->
-
 <script src="app.js"></script>
 </body>
 </html>

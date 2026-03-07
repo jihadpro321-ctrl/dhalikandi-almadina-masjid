@@ -1,614 +1,687 @@
-/* =====================================================
-   DHALIKANDI AL-MADINA JAME MASJID — UPGRADED UI
-   Design: Luxury Islamic Dark  |  Gold + Deep Green
-   Fonts: Amiri (Arabic/display) + Noto Sans Bengali
-===================================================== */
+/* ═══════════════════════════════════════════════════════
+   DHALIKANDI AL-MADINA JAME MASJID — v3
+   Theme : Luxury Islamic Noir · Gold + Teal · Visible BG
+   Fonts : Cinzel · Amiri · Noto Sans Bengali
+═══════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Cinzel:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Cinzel:wght@400;600;700&display=swap');
 
-/* ── TOKENS ── */
+/* ─── DESIGN TOKENS ──────────────────────────────────── */
 :root {
-  --gold:        #C9A84C;
-  --gold-lt:     #E8C97A;
-  --gold-dk:     #8B6914;
-  --gold-glow:   rgba(201,168,76,0.22);
-  --green:       #0D4F3C;
-  --green-mid:   #166B52;
-  --green-lt:    #1E8A6A;
-  --black:       #07130E;
-  --card:        rgba(255,255,255,0.055);
-  --card-border: rgba(201,168,76,0.18);
-  --text:        #F5EDD8;
-  --muted:       rgba(245,237,216,0.55);
-  --white:       #FFFFFF;
-  --purple-bar:  rgba(128,64,255,0.70);   /* kept for active prayer */
-  --radius-lg:   20px;
-  --radius-md:   14px;
-  --radius-sm:   10px;
+  --gold        : #D4A843;
+  --gold-lt     : #F0C96A;
+  --gold-dk     : #8B6418;
+  --teal        : #0E8C78;
+  --teal-lt     : #16B89A;
+  --teal-dk     : #075C4E;
+
+  /* cards — transparent so bg photo shows */
+  --card        : rgba(4, 14, 9, 0.48);
+  --card-b      : rgba(212,168,67,0.20);
+  --card-blur   : blur(18px);
+
+  --text        : #F2E6CC;
+  --muted       : rgba(242,230,204,0.52);
+  --white       : #FFFFFF;
+
+  /* active row — teal, NOT purple, NO animation */
+  --active      : rgba(14,140,120,0.52);
+  --active-b    : rgba(14,140,120,0.60);
+
+  --r-xl : 22px;
+  --r-lg : 16px;
+  --r-md : 12px;
+  --r-sm :  8px;
 }
 
-/* ── RESET ── */
+/* ─── RESET ──────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── BODY / BACKGROUND ── */
+/* ─── BODY — BG PHOTO FULLY VISIBLE ─────────────────── */
 body {
-  font-family: 'Noto Sans Bengali', 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Noto Sans Bengali', system-ui, sans-serif;
   color: var(--text);
-  background: url("bg.jpg") center/cover fixed no-repeat;
   min-height: 100vh;
   overflow-x: hidden;
+  /* bg photo */
+  background: url("bg.jpg") center / cover fixed no-repeat;
 }
 
-/* dark tinted overlay + subtle arabesque pattern */
+/* ONE thin dark veil — bg stays clearly visible */
 body::before {
   content: '';
   position: fixed; inset: 0; z-index: 0;
-  background:
-    radial-gradient(ellipse 90% 50% at 50% 0%,   rgba(201,168,76,0.10) 0%, transparent 65%),
-    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(13,79,60,0.45)  0%, transparent 60%),
-    linear-gradient(180deg, rgba(7,19,14,0.82) 0%, rgba(7,19,14,0.70) 100%);
+  background: rgba(3, 10, 6, 0.38);
   pointer-events: none;
 }
 
+/* subtle gold diamond pattern */
 body::after {
   content: '';
   position: fixed; inset: 0; z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox='0 0 72 72' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A84C' fill-opacity='0.035'%3E%3Cpath d='M36 0L72 36L36 72L0 36Z'/%3E%3Ccircle cx='36' cy='36' r='9'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 2L78 40L40 78L2 40Z' fill='none' stroke='%23D4A843' stroke-opacity='0.04' stroke-width='1'/%3E%3C/svg%3E");
   pointer-events: none;
 }
 
-/* ── MAIN WRAPPER ── */
+/* ─── OVERLAY WRAPPER ────────────────────────────────── */
 .overlay {
   position: relative; z-index: 1;
   min-height: 100vh;
-  padding: 0 0 60px;
-  max-width: 860px;
-  margin: 0 auto;
+  padding-bottom: 60px;
 }
 
-/* ── SITE TITLE ── */
+/* ═══════════════════════════════════════════════════════
+   SITE TITLE
+═══════════════════════════════════════════════════════ */
 .siteTitle {
   text-align: center;
-  padding: 36px 20px 20px;
+  padding: 28px 16px 14px;
 }
 
 .mosqueLogo {
-  width: 76px; height: auto;
-  display: block; margin: 0 auto 14px;
-  filter: drop-shadow(0 4px 18px rgba(201,168,76,0.45));
-  animation: float 4s ease-in-out infinite;
+  width: 68px; height: auto;
+  display: block; margin: 0 auto 10px;
+  filter: drop-shadow(0 4px 18px rgba(212,168,67,0.55));
+  animation: logoFloat 5s ease-in-out infinite;
 }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0);    }
-  50%       { transform: translateY(-6px); }
+@keyframes logoFloat {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
 }
 
 .titleBn {
-  font-size: clamp(20px, 4vw, 36px);
+  font-size: clamp(17px, 4.5vw, 36px);
   font-weight: 800;
   color: var(--gold-lt);
-  text-shadow: 0 2px 20px rgba(201,168,76,0.35);
-  letter-spacing: .5px;
+  text-shadow: 0 2px 24px rgba(212,168,67,0.40),
+               0 1px 3px rgba(0,0,0,0.90);
+  letter-spacing: .4px;
 }
-
 .titleEn {
   font-family: 'Cinzel', serif;
-  font-size: clamp(10px, 1.5vw, 14px);
-  letter-spacing: 2.5px;
-  color: rgba(201,168,76,0.65);
-  margin-top: 6px;
+  font-size: clamp(9px, 1.6vw, 13px);
+  letter-spacing: 3px;
+  color: rgba(212,168,67,0.58);
+  margin-top: 5px;
   text-transform: uppercase;
 }
 
-/* gold ornament divider */
-.siteTitle::after {
-  content: '— ✦ —';
+/* ornament line below title */
+.titleEn::after {
+  content: '';
   display: block;
-  margin-top: 14px;
-  color: var(--gold);
-  font-size: 14px;
-  letter-spacing: 6px;
-  opacity: 0.55;
+  width: 100px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 10px auto 0;
 }
 
-/* ── CLOCK CARD ── */
+/* ═══════════════════════════════════════════════════════
+   CLOCK CARD  — deep teal-green, no purple
+═══════════════════════════════════════════════════════ */
 .clockCard {
-  width: min(760px, 94vw);
-  margin: 4px auto 14px;
-  padding: 26px 22px 20px;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(145deg, rgba(142,45,226,0.88), rgba(60,0,180,0.92));
-  border: 1px solid rgba(180,100,255,0.30);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08);
+  width: min(720px, 93vw);
+  margin: 6px auto 12px;
+  padding: 22px 18px 16px;
+  border-radius: var(--r-xl);
+
+  background: linear-gradient(150deg,
+    rgba(8, 52, 42, 0.90) 0%,
+    rgba(4, 28, 22, 0.94) 100%
+  );
+  border: 1px solid rgba(212,168,67,0.32);
+  box-shadow:
+    0 22px 60px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(212,168,67,0.18);
+
   text-align: center;
   position: relative; overflow: hidden;
-  animation: slideDown .6s ease both;
+  /* NO entrance animation — prevents any repaint flicker */
 }
 
-@keyframes slideDown {
-  from { opacity:0; transform:translateY(-18px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-
+/* glow corner accents */
 .clockCard::before {
   content: '';
-  position: absolute; top:-60px; right:-60px;
-  width:180px; height:180px;
-  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
+  position: absolute; top:-55px; right:-55px;
+  width:160px; height:160px;
+  background: radial-gradient(circle, rgba(212,168,67,0.09) 0%, transparent 68%);
+  border-radius:50%; pointer-events:none;
+}
+.clockCard::after {
+  content: '';
+  position: absolute; bottom:-45px; left:-45px;
+  width:140px; height:140px;
+  background: radial-gradient(circle, rgba(14,140,120,0.10) 0%, transparent 68%);
+  border-radius:50%; pointer-events:none;
 }
 
 .clockTime {
   font-family: 'Cinzel', serif;
-  font-size: clamp(40px, 7vw, 72px);
+  font-size: clamp(38px, 8.5vw, 74px);
   font-weight: 700;
-  letter-spacing: 2px;
-  line-height: 1;
+  letter-spacing: 2px; line-height: 1;
   color: var(--white);
-  text-shadow: 0 0 40px rgba(180,130,255,0.35);
+  text-shadow: 0 0 32px rgba(212,168,67,0.18);
+  /* GPU layer — prevents blink */
+  transform: translateZ(0);
+  will-change: contents;
 }
 
 .clockDate {
   margin-top: 8px;
-  font-size: clamp(13px, 2vw, 16px);
+  font-size: clamp(12px, 2.2vw, 16px);
   font-weight: 600;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.88);
 }
 
 .clockHijri {
   margin-top: 4px;
-  font-size: 13px;
-  color: rgba(255,220,130,0.85);
   font-family: 'Amiri', serif;
+  font-size: clamp(11px, 1.8vw, 14px);
+  color: var(--gold);
+  opacity: .88;
 }
 
-/* ── NEXT PRAYER PILL ── */
+/* ─── NEXT PRAYER PILL ───────────────────────────────── */
 .nextPrayer {
-  margin: 16px auto 10px;
-  width: min(680px, 93vw);
-  padding: 12px 20px;
+  margin: 13px auto 10px;
+  width: min(620px, 90vw);
+  padding: 10px 18px;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(0,230,180,0.95), rgba(0,120,255,0.95));
-  color: #061420;
-  font-weight: 900;
-  font-size: clamp(13px, 2vw, 15px);
-  box-shadow: 0 8px 28px rgba(0,200,160,0.28);
-  letter-spacing: .3px;
+  background: linear-gradient(90deg,
+    rgba(14,140,120,0.88),
+    rgba(8, 90, 76,0.92)
+  );
+  border: 1px solid rgba(212,168,67,0.26);
+  color: var(--white);
+  font-weight: 800;
+  font-size: clamp(11px, 2.2vw, 14px);
+  box-shadow: 0 6px 22px rgba(14,140,120,0.28);
+  letter-spacing: .2px;
+  /* stable — no animation */
+  transform: translateZ(0);
 }
 
-/* ── BUTTON ROW ── */
+/* ─── BUTTON ROW ─────────────────────────────────────── */
 .btnRow {
   display: flex; justify-content: center;
-  gap: 10px; flex-wrap: wrap;
-  margin-top: 14px;
+  gap: 9px; flex-wrap: wrap;
+  margin-top: 13px;
 }
 
 .btn {
   border: none; cursor: pointer;
   border-radius: 999px;
-  padding: 10px 18px;
-  font-size: 13px; font-weight: 800;
+  padding: 9px 17px;
+  font-size: clamp(11px, 1.8vw, 13px);
+  font-weight: 800;
   color: #fff;
   text-decoration: none;
-  display: inline-flex; align-items: center; gap: 7px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.30);
-  transition: transform .15s, box-shadow .15s;
+  display: inline-flex; align-items: center; gap: 6px;
+  box-shadow: 0 5px 16px rgba(0,0,0,0.28);
+  transition: transform .14s ease, box-shadow .14s ease;
   font-family: 'Noto Sans Bengali', sans-serif;
+  white-space: nowrap;
 }
-
-.btn:hover  { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.35); }
+.btn:hover  { transform: translateY(-2px); box-shadow: 0 9px 24px rgba(0,0,0,0.34); }
 .btn:active { transform: translateY(0); }
 
-.btnRed  { background: linear-gradient(45deg, #ff512f, #dd2476); }
-.btnBlue { background: linear-gradient(45deg, #00c6ff, #0072ff); }
-.btnGray { background: linear-gradient(45deg, #3a3a4a, #1a1a2e); border: 1px solid rgba(255,255,255,0.12); }
-
-/* ── PRAYER PANEL ── */
-.prayerPanel {
-  width: min(860px, 96vw);
-  margin: 0 auto;
-  padding: 16px;
-  background: rgba(0,0,0,0.22);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-lg);
-  backdrop-filter: blur(10px);
-  animation: fadeUp .5s ease .1s both;
+.btnRed  { background: linear-gradient(45deg, #e03030, #a01020); }
+.btnBlue { background: linear-gradient(45deg, var(--teal), var(--teal-lt)); }
+.btnGray {
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.16);
 }
 
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(16px); }
-  to   { opacity:1; transform:translateY(0); }
+/* ═══════════════════════════════════════════════════════
+   PAGE LAYOUT — responsive grid
+   Mobile  : single column, full width
+   ≥800px  : prayer list (left) + sidebar (right 300px)
+═══════════════════════════════════════════════════════ */
+.pageBody {
+  width: min(1080px, 96vw);
+  margin: 0 auto;
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: 1fr;   /* mobile default */
+  grid-template-areas:
+    "prayers"
+    "sidebar"
+    "progress"
+    "notice"
+    "ramadan";
+  gap: 12px;
+}
+
+@media (min-width: 800px) {
+  .pageBody {
+    grid-template-columns: 1fr 290px;
+    grid-template-areas:
+      "prayers  sidebar"
+      "progress sidebar"
+      "notice   sidebar"
+      "ramadan  ramadan";
+    align-items: start;
+  }
+}
+
+/* ─── PRAYER PANEL ───────────────────────────────────── */
+.prayerPanel {
+  grid-area: prayers;
+  padding: 14px;
+  background: var(--card);
+  border: 1px solid var(--card-b);
+  border-radius: var(--r-xl);
+  backdrop-filter: var(--card-blur);
+  -webkit-backdrop-filter: var(--card-blur);
 }
 
 .prayerList {
   display: flex; flex-direction: column;
+  gap: 8px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   PRAYER ROW  — THE BLINK FIX
+   Root cause of blink: position:relative + ::before pseudo
+   on an element being updated by JS every second.
+   Fix: use box-shadow for active indicator, GPU layer,
+   and NO pseudo-element with position:absolute.
+═══════════════════════════════════════════════════════ */
+.prRow {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 8px; align-items: center;
+  padding: 13px 15px;
+  border-radius: var(--r-lg);
+  background: rgba(255,255,255,0.042);
+  border: 1px solid rgba(255,255,255,0.07);
+
+  /* GPU composite layer — PREVENTS BLINK */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: background, border-color, box-shadow;
+
+  /* smooth colour change only — no position:absolute children */
+  transition: background .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+
+.prRow:hover {
+  background: rgba(212,168,67,0.07);
+  border-color: rgba(212,168,67,0.22);
+}
+
+/* ACTIVE: inset left stripe via box-shadow, no pseudo-element */
+.prRow.active {
+  background: var(--active);
+  border-color: var(--active-b);
+  box-shadow:
+    inset 4px 0 0 var(--gold),
+    0 4px 22px rgba(14,140,120,0.18);
+}
+
+/* Remove old ::before purple bar completely */
+.prRow::before { content: none !important; }
+.prRow > * { position: static; z-index: auto; }  /* no z-index stack = no repaint */
+
+/* ─── Prayer name ────────────────────────────────────── */
+.prName {
+  display: flex; align-items: baseline;
+  gap: 9px; flex-wrap: wrap; min-width: 0;
+}
+.prName .en {
+  font-size: clamp(15px, 3vw, 22px);
+  font-weight: 900; color: var(--white);
+  white-space: nowrap;
+}
+.prName .ar {
+  font-family: 'Amiri', serif;
+  font-size: clamp(12px, 2vw, 16px);
+  color: var(--gold);
+}
+.prName .bn {
+  font-size: clamp(10px, 1.5vw, 13px);
+  font-weight: 600; color: var(--muted);
+}
+
+/* ─── Prayer time ────────────────────────────────────── */
+.prTime {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(15px, 3vw, 23px);
+  font-weight: 700; color: var(--white);
+  white-space: nowrap; text-align: right;
+  transform: translateZ(0);   /* own GPU layer */
+}
+.prRow.active .prTime { color: var(--gold-lt); }
+
+/* ─── Offset ─────────────────────────────────────────── */
+.prOff {
+  font-size: 11px; font-weight: 700;
+  color: var(--gold); opacity: .72;
+  min-width: 26px; text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SIDEBAR  (right on desktop, below prayers on mobile)
+═══════════════════════════════════════════════════════ */
+.sidebar {
+  grid-area: sidebar;
+  display: flex; flex-direction: column;
+  gap: 12px;
+}
+
+/* Generic card inside sidebar */
+.sideCard {
+  padding: 14px;
+  background: var(--card);
+  border: 1px solid var(--card-b);
+  border-radius: var(--r-lg);
+  backdrop-filter: var(--card-blur);
+  -webkit-backdrop-filter: var(--card-blur);
+}
+
+.sideCardTitle {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 10px;
+}
+
+/* ─── Sunrise / Sunset ───────────────────────────────── */
+.sideTimes {
+  display: grid; grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 
-/* ── PRAYER ROW ── */
-.prRow {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 150px 72px;
-  gap: 10px; align-items: center;
-  padding: 14px 18px;
-  border-radius: var(--radius-md);
-  background: var(--card);
-  border: 1px solid rgba(255,255,255,0.08);
-  overflow: hidden;
-  transition: border-color .2s;
-  animation: fadeUp .4s ease both;
-}
-
-.prRow:nth-child(1) { animation-delay:.05s }
-.prRow:nth-child(2) { animation-delay:.10s }
-.prRow:nth-child(3) { animation-delay:.15s }
-.prRow:nth-child(4) { animation-delay:.20s }
-.prRow:nth-child(5) { animation-delay:.25s }
-
-/* gold left stripe on hover */
-.prRow::after {
-  content: '';
-  position: absolute; left:0; top:0; bottom:0; width:3px;
-  background: linear-gradient(180deg, var(--gold-lt), var(--gold));
-  border-radius: 2px;
-  opacity: 0;
-  transition: opacity .2s;
-}
-
-.prRow:hover { border-color: rgba(201,168,76,0.28); }
-.prRow:hover::after { opacity: 1; }
-
-/* active = purple highlight (kept exactly as before) */
-.prRow.active::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: var(--purple-bar);
-  opacity: 0.75;
-}
-
-.prRow > * { position: relative; z-index: 2; }
-
-/* name block */
-.prName {
-  display: flex; align-items: baseline;
-  gap: 10px; flex-wrap: wrap;
-}
-
-.prName .en {
-  font-size: clamp(18px, 2.8vw, 24px);
-  font-weight: 900;
-}
-
-.prName .ar {
-  font-family: 'Amiri', serif;
-  font-size: clamp(14px, 2vw, 18px);
-  color: var(--gold);
-  opacity: .9;
-}
-
-.prName .bn {
-  font-size: clamp(13px, 1.8vw, 16px);
-  font-weight: 700;
-  opacity: .75;
-}
-
-/* time */
-.prTime {
-  text-align: center;
-  font-family: 'Cinzel', serif;
-  font-size: clamp(20px, 3vw, 28px);
-  font-weight: 700;
-  letter-spacing: .5px;
-  color: var(--white);
-}
-
-.prRow.active .prTime { color: var(--gold-lt); }
-
-/* offset badge */
-.prOff {
-  text-align: right;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--gold);
-  opacity: .8;
-}
-
-/* ── SIDE TIMES (sunrise / sunset) ── */
-.sideTimes {
-  display: flex; gap: 12px;
-  margin-top: 14px;
-}
-
 .sideTimeBox {
-  flex: 1;
-  padding: 14px 12px;
-  border-radius: var(--radius-md);
-  background: var(--card);
-  border: 1px solid var(--card-border);
+  padding: 11px 10px;
+  border-radius: var(--r-md);
+  background: rgba(255,255,255,0.038);
+  border: 1px solid rgba(212,168,67,0.12);
   text-align: center;
-  backdrop-filter: blur(6px);
 }
-
 .sideLabel {
-  font-size: 12px; font-weight: 700;
+  font-size: 10px; font-weight: 700;
   color: var(--gold); letter-spacing: 1px;
-  margin-bottom: 5px;
+  margin-bottom: 4px; text-transform: uppercase;
 }
-
 .sideValue {
   font-family: 'Cinzel', serif;
-  font-size: clamp(18px, 2.8vw, 24px);
-  font-weight: 700;
-  color: var(--white);
+  font-size: clamp(14px, 2.5vw, 20px);
+  font-weight: 700; color: var(--white);
 }
 
-/* ── JUMUA BOX ── */
+/* ─── Jumu'ah ─────────────────────────────────────────── */
 .jumuaBox {
-  margin-top: 12px;
-  padding: 14px 20px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, rgba(13,79,60,0.7), rgba(22,107,82,0.55));
-  border: 1px solid rgba(201,168,76,0.22);
+  padding: 13px 16px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg,
+    rgba(8,44,34,0.72), rgba(12,68,52,0.62));
+  border: 1px solid rgba(212,168,67,0.20);
   display: flex; justify-content: space-between; align-items: center;
-  backdrop-filter: blur(6px);
-  transition: opacity .3s;
+  backdrop-filter: var(--card-blur);
+  -webkit-backdrop-filter: var(--card-blur);
+  transition: opacity .28s;
 }
-
-.jumuaLabel {
-  font-size: 18px; font-weight: 800;
-  color: var(--gold-lt);
-}
-
+.jumuaLabel { font-size: 16px; font-weight: 800; color: var(--gold-lt); }
 .jumuaValue {
   font-family: 'Cinzel', serif;
-  font-size: clamp(20px, 3vw, 26px);
-  font-weight: 700;
-  color: var(--white);
+  font-size: clamp(16px, 2.8vw, 22px);
+  font-weight: 700; color: var(--white);
 }
 
-/* ── PROGRESS CARD ── */
+/* ═══════════════════════════════════════════════════════
+   PROGRESS BAR
+═══════════════════════════════════════════════════════ */
 .progressCard {
-  width: min(860px, 96vw);
-  margin: 14px auto 0;
-  padding: 14px 16px;
-  border-radius: var(--radius-md);
+  grid-area: progress;
+  padding: 13px 15px;
+  border-radius: var(--r-lg);
   background: var(--card);
-  border: 1px solid var(--card-border);
-  backdrop-filter: blur(8px);
-  font-size: 13px; font-weight: 700;
-  color: var(--muted);
-  text-align: center;
+  border: 1px solid var(--card-b);
+  backdrop-filter: var(--card-blur);
+  -webkit-backdrop-filter: var(--card-blur);
+  font-size: 11px; font-weight: 700;
+  color: var(--muted); text-align: center;
 }
-
 .progressBar {
-  height: 10px;
-  background: rgba(255,255,255,0.12);
-  border-radius: 999px;
-  overflow: hidden;
-  margin-top: 8px;
+  height: 7px;
+  background: rgba(255,255,255,0.10);
+  border-radius: 999px; overflow: hidden;
+  margin-top: 7px;
 }
-
 #progressFill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #00ffd0, #0072ff);
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--teal-lt), var(--gold));
   border-radius: 999px;
   display: flex; align-items: center; justify-content: flex-end;
-  padding-right: 6px;
-  color: white; font-weight: 900; font-size: 10px;
+  padding-right: 4px;
+  color: white; font-weight: 900; font-size: 8px;
   transition: width 1s linear;
+  will-change: width;
+  transform: translateZ(0);
 }
 
-/* ── NOTICE BOARD ── */
+/* ═══════════════════════════════════════════════════════
+   NOTICE BOARD
+═══════════════════════════════════════════════════════ */
 .noticeBoard {
-  width: min(860px, 96vw);
-  margin: 14px auto 0;
-  padding: 16px 20px;
-  border-radius: var(--radius-md);
+  grid-area: notice;
+  padding: 14px 17px;
+  border-radius: var(--r-lg);
   background: var(--card);
-  border: 1px solid var(--card-border);
-  backdrop-filter: blur(8px);
+  border: 1px solid var(--card-b);
+  backdrop-filter: var(--card-blur);
+  -webkit-backdrop-filter: var(--card-blur);
 }
-
 .noticeBoard h3 {
-  font-size: 16px; font-weight: 800;
-  color: var(--gold);
-  margin-bottom: 10px;
-  letter-spacing: .5px;
+  font-size: 13px; font-weight: 800;
+  color: var(--gold); margin-bottom: 9px;
 }
-
-#noticeContent {
-  line-height: 1.8;
-  font-size: 14px;
-  color: var(--text);
-  opacity: .9;
-}
-
+#noticeContent { line-height: 1.85; font-size: 13px; }
 #noticeContent div {
-  padding: 4px 0;
-  border-bottom: 1px solid rgba(201,168,76,0.08);
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(212,168,67,0.07);
 }
-
 #noticeContent div:last-child { border-bottom: none; }
 
-/* ── WEATHER WIDGET ── */
+/* ═══════════════════════════════════════════════════════
+   WEATHER  (fixed top-right)
+═══════════════════════════════════════════════════════ */
 .weatherBox {
-  position: fixed; top: 18px; right: 18px; z-index: 50;
-  background: rgba(7,19,14,0.72);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
-  text-align: center;
-  font-weight: 700;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-  min-width: 80px;
+  position: fixed; top: 14px; right: 14px; z-index: 200;
+  background: rgba(3,10,6,0.70);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--card-b);
+  border-radius: var(--r-lg);
+  padding: 10px 13px;
+  text-align: center; font-weight: 700;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.42);
+  min-width: 70px;
 }
+#weatherIcon { font-size: 22px; }
+#weatherTemp { font-size: 15px; margin-top: 3px; color: var(--gold-lt); }
+#weatherDesc { font-size: 10px; color: var(--muted); margin-top: 1px; }
 
-#weatherIcon { font-size: 26px; }
-#weatherTemp { font-size: 18px; margin-top: 4px; color: var(--gold-lt); }
-#weatherDesc { font-size: 11px; color: var(--muted); margin-top: 2px; }
-
-/* ── MOON BOX ── */
+/* ═══════════════════════════════════════════════════════
+   MOON BOX  (fixed, below weather)
+═══════════════════════════════════════════════════════ */
 .moonBox {
-  position: fixed; top: 130px; right: 18px; z-index: 50;
-  background: rgba(7,19,14,0.72);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
-  text-align: center;
-  font-weight: 700;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-  min-width: 80px;
+  position: fixed; top: 118px; right: 14px; z-index: 200;
+  background: rgba(3,10,6,0.70);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--card-b);
+  border-radius: var(--r-lg);
+  padding: 10px 13px;
+  text-align: center; font-weight: 700;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.42);
+  min-width: 70px;
 }
+#moonIcon       { font-size: 24px; }
+#moonText       { font-size: 10px; margin-top: 3px; color: var(--gold-lt); }
+#moonExtra      { font-size: 9px;  color: var(--muted); margin-top: 2px; }
+#moonVisibility { font-size: 9px;  color: var(--muted); margin-top: 1px; }
 
-#moonIcon        { font-size: 28px; }
-#moonText        { font-size: 12px; margin-top: 4px; color: var(--gold-lt); }
-#moonExtra       { font-size: 11px; color: var(--muted); margin-top: 3px; }
-#moonVisibility  { font-size: 10px; color: var(--muted); margin-top: 2px; }
-
-/* ── RAMADAN SECTION ── */
+/* ═══════════════════════════════════════════════════════
+   RAMADAN SECTION
+═══════════════════════════════════════════════════════ */
 .ramadanWrap {
-  width: min(860px, 96vw);
-  margin: 14px auto 0;
-  padding: 18px;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, rgba(10,45,30,0.85), rgba(20,80,55,0.75));
-  border: 1px solid rgba(201,168,76,0.25);
-  backdrop-filter: blur(8px);
+  grid-area: ramadan;
+  width: min(1080px, 96vw);
+  margin: 0 auto;
+  padding: 16px;
+  border-radius: var(--r-xl);
+  background: linear-gradient(145deg,
+    rgba(6,38,26,0.76), rgba(10,56,40,0.66));
+  border: 1px solid rgba(212,168,67,0.20);
+  backdrop-filter: var(--card-blur);
+  -webkit-backdrop-filter: var(--card-blur);
   text-align: center;
   position: relative; overflow: hidden;
 }
-
 .ramadanWrap::before {
   content: '☪';
-  position: absolute; right:20px; top:14px;
-  font-size: 55px; opacity: .06;
-  color: var(--gold);
+  position: absolute; right:18px; top:10px;
+  font-size: 58px; opacity: .05;
+  color: var(--gold); pointer-events: none;
 }
-
 .ramadanTitle {
-  font-size: clamp(16px, 2.5vw, 22px);
-  font-weight: 900;
-  color: var(--gold-lt);
-  margin-bottom: 12px;
-  text-shadow: 0 2px 12px rgba(201,168,76,0.3);
+  font-size: clamp(13px, 2.8vw, 19px);
+  font-weight: 900; color: var(--gold-lt);
+  margin-bottom: 11px;
 }
-
 .ramadanPoster {
-  width: 100%; max-width: 820px;
-  border-radius: var(--radius-md);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  width: 100%; max-width: 840px;
+  border-radius: var(--r-lg);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.50);
 }
 
-/* ── SETTINGS MODAL ── */
+/* ═══════════════════════════════════════════════════════
+   SETTINGS MODAL
+═══════════════════════════════════════════════════════ */
 .settingsModal {
   position: fixed; inset: 0; z-index: 9999;
   background: rgba(0,0,0,0.82);
   display: none; justify-content: center; align-items: center;
-  backdrop-filter: blur(4px);
-  padding: 20px;
+  backdrop-filter: blur(6px);
+  padding: 16px;
 }
-
 .settingsModal.show { display: flex; }
 
 .settingsBox {
-  width: min(720px, 96vw);
-  background: #0b1a13;
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  border: 1px solid rgba(201,168,76,0.22);
-  box-shadow: 0 24px 70px rgba(0,0,0,0.75);
+  width: min(680px, 96vw);
+  background: rgba(4,16,11,0.97);
+  border-radius: var(--r-xl);
+  padding: 18px;
+  border: 1px solid rgba(212,168,67,0.22);
+  box-shadow: 0 28px 80px rgba(0,0,0,0.75);
   max-height: 88vh; overflow-y: auto;
 }
 
 .settingsHeader {
   display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 16px;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(201,168,76,0.15);
+  border-bottom: 1px solid rgba(212,168,67,0.13);
+  margin-bottom: 13px;
 }
-
-.settingsTitle { font-weight: 900; font-size: 15px; color: var(--gold-lt); }
-
+.settingsTitle { font-weight: 800; font-size: 13px; color: var(--gold-lt); }
 .settingsClose {
-  border: none; background: rgba(255,255,255,0.1);
-  color: white; font-size: 18px;
-  border-radius: var(--radius-sm); cursor: pointer;
-  padding: 6px 11px; transition: background .15s;
+  border: none; background: rgba(255,255,255,0.08);
+  color: white; font-size: 16px;
+  border-radius: var(--r-sm); cursor: pointer;
+  padding: 5px 10px; transition: background .14s;
 }
-.settingsClose:hover { background: rgba(255,255,255,0.18); }
+.settingsClose:hover { background: rgba(255,255,255,0.15); }
 
 .settingsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 9px;
 }
 
 .setRow {
   display: flex; align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 12px 14px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(201,168,76,0.12);
-  border-radius: var(--radius-md);
-  transition: border-color .15s;
+  justify-content: space-between; gap: 9px;
+  padding: 10px 13px;
+  background: rgba(255,255,255,0.044);
+  border: 1px solid rgba(212,168,67,0.10);
+  border-radius: var(--r-md);
+  transition: border-color .14s;
 }
-.setRow:hover { border-color: rgba(201,168,76,0.28); }
+.setRow:hover { border-color: rgba(212,168,67,0.24); }
 
-.setName { display: flex; gap:8px; align-items: baseline; font-weight: 800; }
+.setName { display: flex; gap: 7px; align-items: baseline; font-weight: 800; }
 .setName .bn { color: var(--text); }
-.setName .en { font-size: 11px; color: var(--muted); }
+.setName .en { font-size: 10px; color: var(--muted); }
 
-.setCtrl { display: flex; align-items: center; gap: 8px; }
+.setCtrl { display: flex; align-items: center; gap: 7px; }
 
 .stepBtn {
-  width: 34px; height: 34px;
+  width: 32px; height: 32px;
   border: none; cursor: pointer;
-  border-radius: var(--radius-sm);
-  background: rgba(201,168,76,0.15);
+  border-radius: var(--r-sm);
+  background: rgba(212,168,67,0.13);
   color: var(--gold-lt);
-  font-size: 18px; font-weight: 900;
-  transition: background .15s;
+  font-size: 16px; font-weight: 900;
+  transition: background .14s;
 }
-.stepBtn:hover { background: rgba(201,168,76,0.28); }
+.stepBtn:hover { background: rgba(212,168,67,0.25); }
 
 .valBox {
-  min-width: 64px; text-align: center;
-  padding: 6px 10px;
-  border-radius: var(--radius-sm);
+  min-width: 58px; text-align: center;
+  padding: 5px 9px;
+  border-radius: var(--r-sm);
   background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.10);
-  font-weight: 900; font-size: 13px;
+  border: 1px solid rgba(255,255,255,0.08);
+  font-weight: 900; font-size: 12px;
   color: var(--gold-lt);
 }
 
-.settingsFooter {
-  margin-top: 14px; display: flex; justify-content: flex-end;
+.settingsFooter { margin-top: 13px; display: flex; justify-content: flex-end; }
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+═══════════════════════════════════════════════════════ */
+
+/* Tiny phones ≤ 380px */
+@media (max-width: 380px) {
+  .prRow            { grid-template-columns: 1fr auto auto; padding: 9px 9px; gap: 5px; }
+  .prName .en       { font-size: 13px; }
+  .prName .ar       { font-size: 11px; }
+  .prName .bn       { display: none; }
+  .prTime           { font-size: 13px; }
+  .prOff            { font-size: 9px; min-width: 20px; }
+  .settingsGrid     { grid-template-columns: 1fr; }
+  .weatherBox,.moonBox { display: none; }
+  .clockTime        { font-size: 34px; }
 }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 640px) {
-  .prRow                  { grid-template-columns: 1fr 110px 52px; padding: 12px 12px; }
-  .prName .en             { font-size: 17px; }
-  .prName .ar             { font-size: 14px; }
-  .prName .bn             { font-size: 12px; }
-  .prTime                 { font-size: 20px; }
-  .prOff                  { font-size: 11px; }
-  .settingsGrid           { grid-template-columns: 1fr; }
-  .weatherBox, .moonBox   { display: none; }  /* hide on tiny screens */
+/* Standard phones 381–640px */
+@media (min-width: 381px) and (max-width: 640px) {
+  .prName .en   { font-size: 15px; }
+  .prName .ar   { font-size: 12px; }
+  .prName .bn   { font-size: 10px; }
+  .prTime       { font-size: 16px; }
+  .settingsGrid { grid-template-columns: 1fr; }
+  .weatherBox,.moonBox { display: none; }
 }
 
-@media (max-width: 400px) {
-  .prRow { grid-template-columns: 1fr 90px 42px; }
+/* Large phones / small tablets 641–799px */
+@media (min-width: 641px) and (max-width: 799px) {
+  .prName .en { font-size: 17px; }
+  .prTime     { font-size: 19px; }
+  .weatherBox,.moonBox { display: none; }
 }
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar        { width: 6px; }
-::-webkit-scrollbar-track  { background: rgba(0,0,0,0.2); }
-::-webkit-scrollbar-thumb  { background: rgba(201,168,76,0.35); border-radius: 3px; }
+/* Desktop ≥ 800px — two-column layout handled by pageBody grid above */
+@media (min-width: 800px) {
+  /* sidebar sticks to top while scrolling */
+  .sidebar { position: sticky; top: 14px; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.14); }
+::-webkit-scrollbar-thumb { background: rgba(212,168,67,0.28); border-radius: 3px; }
