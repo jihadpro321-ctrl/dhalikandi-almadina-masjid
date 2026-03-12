@@ -587,56 +587,115 @@ async function loadWeather(){
 }
 
 /* =====================================================
-🌙 MOON PHASE (LOCAL CALCULATION – NO API)
+🌙 MOON PHASE (ACCURATE API – DHAKA LOCATION)
 ===================================================== */
 function loadMoon(){
+  // Fetch accurate moon data from Open-Meteo API for Dhaka (23.8103°N, 90.4125°E)
+  const url = "https://api.open-meteo.com/v1/forecast?latitude=23.8103&longitude=90.4125&daily=moon_phase,moon_illumination&timezone=Asia/Dhaka&forecast_days=1";
 
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      const illumination = Math.round(data.daily.moon_illumination[0]);
+      const moonPhase = data.daily.moon_phase[0];
+
+      // Map moon phase value (0-1) to phase name and icon
+      let moonIcon = "🌑";
+      let moonText = "নতুন চাঁদ";
+
+      // moon_phase: 0=New, 0.25=First Quarter, 0.5=Full, 0.75=Last Quarter
+      if(moonPhase > 0.01 && moonPhase <= 0.24){
+        moonIcon = "🌒";
+        moonText = "ক্রমবর্ধমান অর্ধচন্দ্র";
+      }
+      else if(moonPhase > 0.24 && moonPhase <= 0.26){
+        moonIcon = "🌓";
+        moonText = "প্রথম ত্রৈমাসিক";
+      }
+      else if(moonPhase > 0.26 && moonPhase <= 0.49){
+        moonIcon = "🌔";
+        moonText = "ক্রমবর্ধমান গিববাস";
+      }
+      else if(moonPhase > 0.49 && moonPhase <= 0.51){
+        moonIcon = "🌕";
+        moonText = "পূর্ণ চাঁদ";
+      }
+      else if(moonPhase > 0.51 && moonPhase <= 0.74){
+        moonIcon = "🌖";
+        moonText = "হ্রাসপ্রাপ্ত গিববাস";
+      }
+      else if(moonPhase > 0.74 && moonPhase <= 0.76){
+        moonIcon = "🌗";
+        moonText = "শেষ ত্রৈমাসিক";
+      }
+      else if(moonPhase > 0.76 && moonPhase < 1.0){
+        moonIcon = "🌘";
+        moonText = "হ্রাসপ্রাপ্ত অর্ধচন্দ্র";
+      }
+
+      // Update DOM with accurate data
+      moonSightingAlert(illumination);
+      document.getElementById("moonIcon").textContent = moonIcon;
+      document.getElementById("moonText").textContent = moonText;
+      document.getElementById("moonExtra").textContent = "আলোকিততা: " + illumination + "%";
+
+      // ✅ Visibility check (Bangla text)
+      let visibility = "কম";
+      if(illumination > 20) visibility = "মাঝারি";
+      if(illumination > 40) visibility = "ভাল";
+      if(illumination > 60) visibility = "খুব ভাল";
+
+      document.getElementById("moonVisibility").textContent =
+        "চাঁদ দেখার উপযোগিতা: " + visibility;
+    })
+    .catch(err => {
+      // Fallback to old calculation if API fails
+      console.warn("Moon API failed, using fallback:", err);
+      loadMoonFallback();
+    });
+}
+
+// Fallback calculation if API is unavailable
+function loadMoonFallback(){
   const now = new Date();
-
   const synodicMonth = 29.53058867;
   const knownNewMoon = new Date("2000-01-06");
-
   const days = (now - knownNewMoon) / (1000*60*60*24);
   const phase = (days % synodicMonth) / synodicMonth;
 
   let moonIcon = "🌑";
-  let moonText = "New Moon";
+  let moonText = "নতুন চাঁদ";
 
   if(phase > 0.05 && phase <= 0.25){
     moonIcon = "🌒";
-    moonText = "Waxing Crescent";
+    moonText = "ক্রমবর্ধমান অর্ধচন্দ্র";
   }
   else if(phase > 0.25 && phase <= 0.5){
     moonIcon = "🌓";
-    moonText = "First Quarter";
+    moonText = "প্রথম ত্রৈমাসিক";
   }
   else if(phase > 0.5 && phase <= 0.75){
     moonIcon = "🌔";
-    moonText = "Waxing Gibbous";
+    moonText = "ক্রমবর্ধমান গিববাস";
   }
   else if(phase > 0.75){
     moonIcon = "🌕";
-    moonText = "Full Moon";
+    moonText = "পূর্ণ চাঁদ";
   }
 
   const illumination = Math.round(phase * 100);
   moonSightingAlert(illumination);
   document.getElementById("moonIcon").textContent = moonIcon;
   document.getElementById("moonText").textContent = moonText;
+  document.getElementById("moonExtra").textContent = "আলোকিততা: " + illumination + "%";
 
-  document.getElementById("moonExtra").textContent =
-    "Illumination: " + illumination + "%";
-
-  // ✅ FIXED PART
   let visibility = "কম";
-
   if(illumination > 20) visibility = "মাঝারি";
   if(illumination > 40) visibility = "ভাল";
   if(illumination > 60) visibility = "খুব ভাল";
 
   document.getElementById("moonVisibility").textContent =
     "চাঁদ দেখার উপযোগিতা: " + visibility;
-
 }
 
 
